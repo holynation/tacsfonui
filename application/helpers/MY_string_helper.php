@@ -1,7 +1,7 @@
 <?php 
 
 	function getTitlePage($page = ''){
-		return ($page != '') ? "Adeoyo Maternity Teaching Hospital | $page" : 'Adeoyo Maternity Teaching Hospital';
+		return ($page != '') ? "TACSFON - Household of Refuge | $page" : "TACSFON - Household of Refuge";
 	}
 	function isSessionActive(){
    		$obj = &get_instance();
@@ -412,6 +412,11 @@
 		}
 		return $value;
 	}
+	function getMediaType($file){
+		$media = get_mime_by_extension($file);
+		$media = explode('/', $media);
+		return $media[0];
+	}
 	function getFileExtension($filename){
 		$index = strripos($filename, '.',-1);//start from the back
 		if ($index === -1) {
@@ -451,7 +456,7 @@
 	}
 
 	function appBuildName($key = 'cookie'){
-		$result = array('cookie' => 'edu_cv', 'userType' => 'cv');
+		$result = array('cookie' => 'tacsfon', 'userType' => 'meetings');
 		return $result[$key];
 	}
 

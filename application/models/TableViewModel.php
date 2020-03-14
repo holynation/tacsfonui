@@ -4,6 +4,7 @@
 */
 class TableViewModel extends CI_Model
 {
+	private $uploadedFolderName = 'uploads'; // this name should be constant and not change at all
 	private $modelFolderName= 'entities';
 	private $statusArray = array(1=>'Active',0=>'Inactive');
 	private $booleanArray = array(0 =>'No',1=>'Yes' );
@@ -16,6 +17,7 @@ class TableViewModel extends CI_Model
 		$this->load->model('tableActionModel');
 		$this->load->helper('string');
 		$this->load->helper('download');
+		$this->load->helper('file');
 		$this->lang->load('table_model');
 	}
 	//create  a method that load the table based on the specified paramterr
@@ -119,10 +121,17 @@ class TableViewModel extends CI_Model
 		// print_r($data);exit;
 		foreach ($actionArray as $key => $value) {
 			// this section is used for getting another column alongside the ID of that model
+			// something like this vc/admin/edit/model_name/new_column/id
 			if(is_array($value)){
 				$temp = $value;
 				$otherParam = $temp[1];
 				$otherParam = $data->$otherParam;
+				// check if the additional param include the default upload folder
+				// this also means that the uploaded folder would start the directory of the path
+				if(startsWith($otherParam,$this->uploadedFolderName)){
+					$tempParam = explode('/',$otherParam);
+					$otherParam = base64_encode($tempParam[2]); // this would be the file name used
+				}
 				$value = $temp[0] ."/".$otherParam;
 			}
 			$currentid = $data->ID;
@@ -215,19 +224,22 @@ class TableViewModel extends CI_Model
 		
 			if (!empty($documentArray) && in_array($key, $documentArray)) {
 				$link = 'javascript:void(0)';
-				$imageMsg = 'no image yet';
+				$fileMsg = 'no image yet';
 				if($value != ""){
 					$link = base_url($value);
-					$imageMsg = "View Image";
 				}
 
-				$img_ext = array('gif', 'jpg', 'jpeg', 'jpe', 'png');
-				$ext = getFileExtension(strtolower($link));
-				
-				if(in_array($ext, $img_ext)){
-					$value = "<a href='$link' target='_blank'>$imageMsg</a>";
+				$typeExt = getMediaType($link);
+				if($typeExt == 'audio'){
+					$fileMsg = 'Hear Audio';
+					$value = $value = "<a href='$link' target='_blank'>$fileMsg</a>";
+				}else if($typeExt == 'image'){
+					$fileMsg = 'View Image';
+					$value = "<a href='$link' target='_blank'>$fileMsg</a>";
+				}else if($typeExt == 'video'){
+					$fileMsg = 'View Video';
+					$value = "<a href='$link' target='_blank'>$fileMsg</a>";
 				}else{
-					// $id = $rowData->ID;
 					$selector = $model . "_download_$id";
 					$value = "<a href='$link' target='_blank' id='$selector'>Download</a>";
 					// $value .= "<script>

@@ -1,9 +1,9 @@
-<?php include_once 'template/header.php'; ?>
+<?php include_once 'template/header_admin.php'; ?>
 <?php include_once 'template/sidebar.php'; ?>
 <!-- this is the sidebar position -->
 <?php
 $exclude = ($configData && array_key_exists('exclude', $configData))?$configData['exclude']:array();
-$has_upload = ($configData && array_key_exists('has_upload', $configData))?$configData['has_upload']:array();
+$has_upload = ($configData && array_key_exists('has_upload', $configData))?$configData['has_upload']:false;
 $hidden = ($configData && array_key_exists('hidden', $configData))?$configData['hidden']:array();
 $showStatus = ($configData && array_key_exists('show_status', $configData))?$configData['show_status']:false;
 $submitLabel = ($configData && array_key_exists('submit_label', $configData))?$configData['submit_label']:"Save";
@@ -67,143 +67,174 @@ $where .= ' order by ID desc ';
     ?>
 </div>
 
-        <div class="page-wrapper">
-            <div class="content">
-                <div class="row">
-                    <div class="col-sm-4 col-3">
-                        <h4 class="page-title">Administrative <small><?php echo removeUnderscore($model); ?></small></h4>
-                    </div>
-                    <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="javascript:void(0);" class="btn btn-primary btn-rounded float-right" data-toggle='modal' data-target='#modal-add'><i class="fa fa-plus"></i> Add <?php echo removeUnderscore($model); ?></a>
-                    </div>
-                   <!--  <div class="col-md-3 col-sm-3">
-                      <button type="button" class="btn btn-dark" data-toggle='modal' data-target='#modal-upload' data-animate-modal="zoomInDown">Batch Upload</button>
-                    </div> -->
+<main class="main--container">
+  <!-- Page Header Start -->
+    <section class="page--header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- Page Title Start -->
+                    <h2 class="page--title h5"><?php echo ucfirst(removeUnderscore($model)); ?></h2>
+                    <!-- Page Title End -->
+
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Dashboard</a></li>
+                        <li class="breadcrumb-item"><span>Administrative <small><?php echo removeUnderscore($model); ?></small></span></li>
+                    </ul>
                 </div>
 
-                <?php if ($configData==false || array_key_exists('has_upload', $configData)==false || $configData['has_upload']): ?>
-                  <div class="modal modal-default fade" id="modal-upload">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h4 class="modal-title"><?php echo removeUnderscore($model) ?> Batch Upload</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div >
-                              <a  class='btn btn-info' href="<?=base_url("mc/template/$model?exc=name")?>">Download Template</a>
-                            </div>
-                            <br/>
-                            <h3>Upload <?php echo removeUnderscore($model) ?></h3>
-                            <form method="post" action="<?php echo base_url('mc/sFile/'.$model) ?>" enctype="multipart/form-data">
-                            <div class="form-group">
-                              <input type="file" name="bulk-upload" class="form-control">
-                              <input type="hidden" name="MAX_FILE_SIZE" value="100000">
-                            </div>
-                             <div class="form-group">
-                                <input type="submit" class='btn btn-success' name="submit" value="Upload">
-                              </div>
-                            </form>
+                <div class="col-lg-6">
+                    <!-- Create model -->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <a href="javascript:void(0);" class="btn btn-warning" data-toggle='modal' data-target='#modal-add'><i class="fa fa-plus"></i> Add <?php echo removeUnderscore($model); ?></a>
+                        </div>
+
+                        <div class="col-sm-3 ml-4">
+                          <div>
+                            <button type="button" class="btn btn-dark" data-toggle='modal' data-target='#modal-upload' data-animate-modal="zoomInDown">Batch Upload</button>
                           </div>
                         </div>
-                        <!-- /.modal-content -->
-                      </div>
-                      <!-- /.modal-dialog -->
-                  </div>
-                  <!-- /.modal -->
-                <?php endif ?>
-
-                <!-- this is the filter section -->
-                <div class="row filter-row">
-                    <?php $where=''; ?>
-                    <form action="" class="filter_form">
-                        <?php if ($filter): ?>
-                            <?php foreach ($filter as $item): ?>
-                             <?php 
-                              $display = (isset($item['filter_display'])&&$item['filter_display'])?$item['filter_display']:$item['filter_label'];
-                            ?>
-                            <?php 
-                              if (isset($_GET[$display]) && $_GET[$display]) {
-                                $value = $this->db->conn_id->escape_string($_GET[$display]);
-                                $where.= $where?" and {$item['filter_label']}='$value' ":"where {$item['filter_label']}='$value' ";
-                              }
-                        ?>
-                            <select class="select floating <?php echo isset($item['child'])?'autoload':'' ?>" name="<?php echo $display; ?>" id="<?php echo $display; ?>"  <?php echo isset($item['child'])?"data-child='{$item['child']}'":""?> <?php echo isset($item['load'])?"data-load='{$item['load']}'":""?> >
-                              <option value="">..select <?php echo removeUnderscore(rtrim($display,'_id')) ?>...</option>
-                              <?php if (isset($item['preload_query'])&& $item['preload_query']): ?>
-                                <?php echo buildOptionFromQuery($this->db,$item['preload_query'],null,isset($_GET[$display])?$_GET[$display]:''); ?>
-                              <?php endif; ?>
-                            </select>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-
-                        <?php if ($search): ?>
-                            <?php 
-                              $placeholder=" search by : ".implode(',', $search);
-                              $val = isset($_GET['q'])?$_GET['q']:'';
-                              $val = $this->db->conn_id->escape_string($val);
-                            ?>
-                            <input class="form-control floating" type="text" name="q" placeholder="<?php echo $placeholder; ?>" value="<?php echo $val; ?>" style="width:30%;">
-                   
-                        <?php endif; ?>
-                  
-                        <?php if ($search || $filter): ?>
-                            <input type="submit" value="Filter" class="btn btn-success btn-block">
-                        <?php endif; ?>
-                    </form>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3><?php echo $tableTitle; ?></h3>
-                        <?php echo $tableData;?>
                     </div>
+                    <!-- create model End -->
                 </div>
-                <!-- this is add modal -->
-                <div class="modal fade" id="modal-add" role="dialog">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title"><?php echo removeUnderscore($model);  ?> Entry Form</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span></button>
-                      </div>
-                      <div class="modal-body">
-                        <p>
-                          <?php echo $formContent; ?>
-                        </p>
-                      </div>
-                    </div>
-                    <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
-                </div>
-
-                <!-- this is the edit modal -->
-                <div class="modal fade" id="modal-edit">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"></h4>
-                      </div>
-                      <div class="modal-body">
-                        <p id="edit-container">
-                          
-                        </p>
-                      </div>
-                    </div>
-                    <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
             </div>
         </div>
+    </section>
+  <!-- Page Header End -->
+
+    <div>
+      <!-- this is the batch uploading section -->
+        <?php if ($has_upload != ''): ?>
+          <div class="modal modal-default fade" id="modal-upload">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title"><?php echo removeUnderscore($model) ?> Batch Upload</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div >
+                      <a  class='btn btn-info' href="<?=base_url("mc/template/$model?exc=name")?>">Download Template</a>
+                    </div>
+                    <br/>
+                    <h3>Upload <?php echo removeUnderscore($model) ?></h3>
+                    <form method="post" action="<?php echo base_url('mc/sFile/'.$model) ?>" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <input type="file" name="bulk-upload" class="form-control">
+                      <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+                    </div>
+                     <div class="form-group">
+                        <input type="submit" class='btn btn-success' name="submit" value="Upload">
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+          </div>
+          <!-- /.modal -->
+        <?php endif; ?>
+
+        <!-- this is the filter section -->
+        <div class="row filter-row">
+            <?php $where=''; ?>
+            <form action="" class="filter_form">
+                <?php if ($filter): ?>
+                    <?php foreach ($filter as $item): ?>
+                     <?php 
+                      $display = (isset($item['filter_display'])&&$item['filter_display'])?$item['filter_display']:$item['filter_label'];
+                    ?>
+                    <?php 
+                      if (isset($_GET[$display]) && $_GET[$display]) {
+                        $value = $this->db->conn_id->escape_string($_GET[$display]);
+                        $where.= $where?" and {$item['filter_label']}='$value' ":"where {$item['filter_label']}='$value' ";
+                      }
+                ?>
+                    <select class="select floating <?php echo isset($item['child'])?'autoload':'' ?>" name="<?php echo $display; ?>" id="<?php echo $display; ?>"  <?php echo isset($item['child'])?"data-child='{$item['child']}'":""?> <?php echo isset($item['load'])?"data-load='{$item['load']}'":""?> >
+                      <option value="">..select <?php echo removeUnderscore(rtrim($display,'_id')) ?>...</option>
+                      <?php if (isset($item['preload_query'])&& $item['preload_query']): ?>
+                        <?php echo buildOptionFromQuery($this->db,$item['preload_query'],null,isset($_GET[$display])?$_GET[$display]:''); ?>
+                      <?php endif; ?>
+                    </select>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <?php if ($search): ?>
+                    <?php 
+                      $placeholder=" search by : ".implode(',', $search);
+                      $val = isset($_GET['q'])?$_GET['q']:'';
+                      $val = $this->db->conn_id->escape_string($val);
+                    ?>
+                    <input class="form-control floating" type="text" name="q" placeholder="<?php echo $placeholder; ?>" value="<?php echo $val; ?>" style="width:30%;">
+           
+                <?php endif; ?>
+          
+                <?php if ($search || $filter): ?>
+                    <input type="submit" value="Filter" class="btn btn-success btn-block">
+                <?php endif; ?>
+            </form>
+        </div>
+
+        <br />
+        <!-- this is the table to show the model -->
+        <section class="main--contentss">
+          <div class="panel">
+            <div>
+                <div class="col-md-12">
+                    <h3><?php echo $tableTitle; ?></h3>
+                    <?php echo $tableData;?>
+                </div>
+            </div>
+          </div>
+        </section>
+        
+
+        <!-- this is add modal -->
+        <div class="modal fade" id="modal-add" role="dialog">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title"><?php echo removeUnderscore($model);  ?> Entry Form</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+                <p>
+                  <?php echo $formContent; ?>
+                </p>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
+        <!-- this is the edit modal -->
+        <div class="modal fade" id="modal-edit">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+              </div>
+              <div class="modal-body">
+                <p id="edit-container">
+                  
+                </p>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     </div>
+</main>
 <script>
     var inserted=false;
     $(document).ready(function($) {
@@ -248,4 +279,4 @@ $where .= ' order by ID desc ';
     }
   </script>
 
-<?php include_once 'template/footer.php'; ?>
+<?php include_once 'template/footer_admin.php'; ?>

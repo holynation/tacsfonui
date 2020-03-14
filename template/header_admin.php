@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/style.css">
 
     <!-- Page Level Stylesheets -->
-    
+    <script src="<?php echo base_url(); ?>assets/private/js/jquery.min.js"></script>
 </head>
 <body>
 
@@ -126,3 +126,21 @@
             </div>
         </header>
         <!-- Navbar End -->
+
+        <style>
+          #notification{
+              display: none;
+              position: absolute;
+              width: 50%;
+              z-index: 4000;
+          }
+          .modal-dialog {
+              margin-top: 100px ;
+          }
+          select{
+            wdith:100%;
+            display: block;
+          }
+      </style>
+
+<div id="notification" class="alert alert-dismissable text-center"></div>

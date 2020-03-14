@@ -21,10 +21,10 @@ class FormConfig extends CI_Model
 	private function alternateAction(){
 		$action = array();
 		$userType = $this->webSessionManager->getCurrentUserProp('user_type');
-		if($userType == 'patients'){
-			$action = array('edit' => 'edit/patients','profile' => 'vc/patients/profile');
+		if($userType == 'member'){
+			$action = array('edit' => 'edit/member','profile' => 'vc/member/profile');
 		}else{
-			$action = array('enable'=>'getEnabled','edit' => 'edit/patients','delete' => 'delete/patients','profile'=>'vc/patients/profile');
+			$action = array('enable'=>'getEnabled','edit' => 'edit/member','delete' => 'delete/member','profile'=>'vc/member/profile');
 		}
 		return $action;
 	}
@@ -47,16 +47,16 @@ class FormConfig extends CI_Model
 	{
 		$this->insertConfig= array
 		(
-			'patients'=>array
+			'member'=>array
 			(
-				'exclude' => array('state_of_origin','lga_of_origin'),
+				'exclude' => array(),
 				'table_exclude'=>array('img_path','status'),
 				'table_action' => $this->alternateAction(),
 				'submit_label' => 'Save',
-				'table_title' => 'Patient Table',
+				'table_title' => 'Member Table',
 				// 'search'=>array('first_name','last_name','email'),
 				'show_status' => true,
-				'query' => 'select distinct patients.ID,title_name,first_name,last_name,email,phone_num,dob as date_of_birth,gender,marital_status,address,state_of_origin,lga_of_origin,img_path,patients.status from patients left join title on title.id = patients.title_id'
+				'query' => 'select distinct member.ID,firstname,lastname,email,phone_number,path,member.status from member'
 			),
 			'admin'=>array
 			(
@@ -66,11 +66,8 @@ class FormConfig extends CI_Model
 			'role'=>array(
 				'query'=>'select * from role where ID<>1'
 			),
-			'appointment'=> array(
-				'submit_label' => 'Start Questioning'
-			),
-			'configure_report' => array(
-				'query' => "select * from configure_report"
+			'audios' =>array(
+				// 'has_upload' => false
 			)
 		//add new entry to this array
 		);
@@ -95,9 +92,9 @@ class FormConfig extends CI_Model
 	{
 		$this->updateConfig= array
 		(
-		'patients'=>array
+		'member'=>array
 			(
-				'exclude'=>array('state_of_origin','lga_of_origin')		
+				'exclude'=>array('')		
 			),
 		//add new entry to this array
 		);

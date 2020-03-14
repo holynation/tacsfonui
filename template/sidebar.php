@@ -2,7 +2,7 @@
 <?php 
     $userType=$this->webSessionManager->getCurrentUserProp('user_type');
     if ($userType=='member') {
-      include_once "template/sidebar_doctor.php";
+      include_once "template/sidebar_member.php";
     }
 ?>
     
@@ -33,12 +33,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="mailbox_inbox.html" class="nav-link" title="Messages">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" title="Logout">
+                        <a href="<?php echo base_url('auth/logout'); ?>" class="nav-link" title="Logout">
                             <i class="fa fa-sign-out-alt"></i>
                         </a>
                     </li>

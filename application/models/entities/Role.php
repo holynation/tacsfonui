@@ -264,7 +264,7 @@ public function getModules()
 			'children'=>array(
 				'Home Slider' => 'vc/add/slider',
 				'Gallery' => 'vc/admin/event_gallery',
-				'Audio' => 'vc/admin/audio',
+				'Audio' => 'vc/add/audios',
 				'Video' => 'vc/admin/video',
 				'Prog. Publicity' => 'vc/add/publicity',
 				'Media Collection' => 'vc/add/media_collection'

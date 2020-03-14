@@ -9,7 +9,6 @@
     <!-- Wrapper End -->
 
     <!-- Scripts -->
-    <script src="<?php echo base_url(); ?>assets/private/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/jquery-ui.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/bootstrap.bundle.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/perfect-scrollbar.min.js"></script>
@@ -26,6 +25,7 @@
     <script src="<?php echo base_url(); ?>assets/private/js/ion.rangeSlider.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/datatables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/main.js"></script>
+    <script src="<?php echo base_url(); ?>assets/private/js/custom.js"></script>
 
     <!-- Page Level Scripts -->
 

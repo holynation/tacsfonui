@@ -4,7 +4,7 @@
 	*/
 	class ActionController extends CI_Controller
 	{
-		
+		private $uploadedFolderName = 'uploads';
 		function __construct()
 		{
 			parent::__construct();
@@ -49,8 +49,20 @@
 		public function view($model,$id){
 
 		}
-		public function delete($model,$id){
+		public function delete($model,$extra='',$id=''){
 			//kindly verify this action before performing it
+			$id = ($id == '') ? $extra : $id;
+			$extra = ($extra != '' && $id != '') ? base64_decode($extra) : $id;
+			// this extra param is a method to find a file and removing it from the server
+			if($extra){
+				$this->load->model("entities/$model");
+				$paramFile = $model::$documentField;
+				$filePath =  $this->uploadedFolderName.'/'.@$paramFile['path']['directory'].$extra;
+				if(file_exists($filePath)){
+					@chmod($filePath, 0777);
+					@unlink($filePath);
+				}
+			}
 			$this->load->model("entities/$model");
 			//check that model is actually a subclass
 			if ( !empty($id) && is_subclass_of($this->$model,'Crud' )&&$this->$model->delete($id)) {

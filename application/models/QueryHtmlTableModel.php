@@ -259,11 +259,17 @@
 				$current = $data[$keys[$i]];
 
 				if (isFilePath($current)) {
-					$ext = getFileExtension(strtolower($current));
-					$img_ext = array('gif', 'jpg', 'jpeg', 'jpe', 'png');
-					if(in_array($ext, $img_ext)){
-						$link = base_url($current);
-						$current = "<a href='$link' target='_blank' class=''>View Image</a>";
+					$typeExt = getMediaType($current);
+					$link = base_url($current);
+					if($typeExt == 'audio'){
+						$fileMsg = 'Hear Audio';
+						$current = "<a href='$link' target='_blank'>$fileMsg</a>";
+					}else if($typeExt == 'image'){
+						$fileMsg = 'View Image';
+						$current = "<a href='$link' target='_blank'>$fileMsg</a>";
+					}else if($typeExt == 'video'){
+						$fileMsg = 'View Video';
+						$current = "<a href='$link' target='_blank'>$fileMsg</a>";
 					}else{
 						$link = base_url($current);
 						$current = "<a href='$link' target='_blank' class='btn btn-info'>Download</a>";

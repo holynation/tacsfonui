@@ -297,7 +297,7 @@ class ModelController extends CI_Controller
 			return false;
 		}
 		$filename=$_FILES[$name]['name'];
-		$ext = getFileExtension($filename);
+		$ext = strtolower(getFileExtension($filename));
 		$fileSize = $_FILES[$name]['size'];
 		$typeValid = is_array($type)?in_array(strtolower($ext), $type):strtolower($ext)==strtolower($type);
 		if (!empty($filename) &&  $typeValid  && !empty($destination)) {
@@ -396,8 +396,8 @@ class ModelController extends CI_Controller
 			$result = $this->db->query($query,array($id));
 			$result=$result->result_array();
 			
-			// the return message 'insert' is a rare case whereby there is no image at first
-			// yet one want to add the image through update action
+			// the return message 'insert' is a rare case whereby there is no media file at first
+			// yet one want to add the media file through update action
 			return (!empty($result[0][$name])) ? $result[0][$name] : 'insert';
 		}
 		else{
@@ -440,7 +440,7 @@ class ModelController extends CI_Controller
 
 	}
 	private function DoAfterInsertion($model,$type,$data,&$db,&$message=''){
-		$method = 'on'.ucfirst($model).'Suspend';
+		$method = 'on'.ucfirst($model).'Inserted';
 		if (method_exists($this->modelControllerCallback, $method)) {
 			return $this->modelControllerCallback->$method($data,$type,$db,$message);
 		}
@@ -514,13 +514,6 @@ class ModelController extends CI_Controller
 			echo createJsonMessage('status',false,'message',$message);
 			return;
 		}
-		//this is to check for the book_published model
-		// if($model == 'book_published'){
-		// 	$arr = $parameter;
-		// 	$result=array();
-		// 	$names = $arr['author_names'];
-			
-		// }
 
 		$this->$model->setArray($parameter);
 		if (!$this->validateModel($model,$message)) {
@@ -840,12 +833,8 @@ class ModelController extends CI_Controller
 	{
 		$username='';
 		$password='surname';
-		if ($model=='student_biodata') {
+		if ($model=='member') {
 			$username='matric_number';
-		}
-		if ($model=='lecturer') {
-			$username ="email";
-			$password = "staff_no";
 		}
 		if ($model=='admin') {
 			$username ='email';
@@ -879,45 +868,6 @@ class ModelController extends CI_Controller
 		// }
 		// show_404();
 		// exit;
-	}
-
-	public function insert_academic(){
-		if(isset($_POST)){
-			$lecturer_id = $this->input->post('lecturer_id',true);
-			$course_code = $this->input->post('course_code',true);
-			$course_title = $this->input->post('course_title',true);
-			$session_name = $this->input->post('session_name',true);
-			$total_person = $this->input->post('total_person',true);
-			$category = $this->input->post('category',true);
-
-			if (!isNotEmpty($course_code,$course_title,$session_name,$total_person,$category)) {
-					echo "empty field detected . please fill all required field and try again";
-					return;
-				}
-			}
-			$sessionJoin='';
-			sort($session_name);
-			$count = count($session_name);
-			foreach($session_name as $key => $val){
-				$sessionJoin.= $val;
-				if(($key+1) != $count){
-					$sessionJoin.= " ,";
-				}
-			}
-			$sessionJoin = $sessionJoin;
-			$query = "insert ignore into teaching_experience(lecturer_id,course_code,course_title,session_name,total_person,category) values(?,?,?,?,?,?)";
-			$result = $this->db->query($query,array($lecturer_id,$course_code,$course_title,$sessionJoin,$total_person,$category));
-			if ($result) {
-				$this->db->trans_commit();
-				echo createJsonMessage('status',true,'message','Operation was successfully');
-				exit;
-			}else{
-				$this->trans_rollback();
-				echo createJsonMessage('status',false,'message','Error occured while performing the operation');
-				return false;
-			}
-			
-
 	}
 
 
