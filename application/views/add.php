@@ -6,7 +6,9 @@ $exclude = ($configData && array_key_exists('exclude', $configData))?$configData
 $has_upload = ($configData && array_key_exists('has_upload', $configData))?$configData['has_upload']:false;
 $hidden = ($configData && array_key_exists('hidden', $configData))?$configData['hidden']:array();
 $showStatus = ($configData && array_key_exists('show_status', $configData))?$configData['show_status']:false;
+$showAddForm = ($configData && array_key_exists('show_add', $configData))?$configData['show_add']:true;
 $submitLabel = ($configData && array_key_exists('submit_label', $configData))?$configData['submit_label']:"Save";
+$extraLink = ($configData && array_key_exists('extra_link', $configData))?$configData['extra_link']:false;
 $tableAction = ($configData && array_key_exists('table_action', $configData))?$configData['table_action']:$model::$tableAction;
 $tableExclude = ($configData && array_key_exists('table_exclude', $configData))?$configData['table_exclude']:array();
 $query = ($configData && array_key_exists('query', $configData))?$configData['query']:array();
@@ -83,9 +85,11 @@ $where .= ' order by ID desc ';
                     </ul>
                 </div>
 
+              
                 <div class="col-lg-6">
                     <!-- Create model -->
                     <div class="row">
+                      <?php if($showAddForm): ?>
                         <div class="col-sm-3">
                             <a href="javascript:void(0);" class="btn btn-warning" data-toggle='modal' data-target='#modal-add'><i class="fa fa-plus"></i> Add <?php echo removeUnderscore($model); ?></a>
                         </div>
@@ -95,6 +99,14 @@ $where .= ' order by ID desc ';
                             <button type="button" class="btn btn-dark" data-toggle='modal' data-target='#modal-upload' data-animate-modal="zoomInDown">Batch Upload</button>
                           </div>
                         </div>
+                      <?php endif; ?>
+
+                        <?php if($extraLink): ?>
+                        <div class="col-sm-3">
+                            <a href="<?php echo base_url($extraLink); ?>" class="btn btn-warning"><i class="fa fa-plus"></i> Add <?php echo removeUnderscore($model); ?></a>
+                        </div>
+                      <?php endif; ?>
+
                     </div>
                     <!-- create model End -->
                 </div>
@@ -192,10 +204,9 @@ $where .= ' order by ID desc ';
           </div>
         </section>
         
-
         <!-- this is add modal -->
         <div class="modal fade" id="modal-add" role="dialog">
-          <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title"><?php echo removeUnderscore($model);  ?> Entry Form</h4>

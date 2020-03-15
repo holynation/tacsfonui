@@ -52,12 +52,13 @@
 		public function delete($model,$extra='',$id=''){
 			//kindly verify this action before performing it
 			$id = ($id == '') ? $extra : $id;
-			$extra = ($extra != '' && $id != '') ? base64_decode($extra) : $id;
+			$extra = ($extra != '' && $id != '') ? base64_decode(urldecode($extra)) : $id;
 			// this extra param is a method to find a file and removing it from the server
 			if($extra){
 				$this->load->model("entities/$model");
 				$paramFile = $model::$documentField;
-				$filePath =  $this->uploadedFolderName.'/'.@$paramFile['path']['directory'].$extra;
+				$directoryName = $model.'_path';
+				$filePath =  $this->uploadedFolderName.'/'.@$paramFile[$directoryName]['directory'].$extra;
 				if(file_exists($filePath)){
 					@chmod($filePath, 0777);
 					@unlink($filePath);

@@ -263,9 +263,9 @@ public function getModules()
 			'class'=>'fa-media',
 			'children'=>array(
 				'Home Slider' => 'vc/add/slider',
-				'Gallery' => 'vc/admin/event_gallery',
+				'Gallery' => 'vc/admin/gallery',
 				'Audio' => 'vc/add/audios',
-				'Video' => 'vc/admin/video',
+				'Video' => 'vc/add/videos',
 				'Prog. Publicity' => 'vc/add/publicity',
 				'Media Collection' => 'vc/add/media_collection'
 			)

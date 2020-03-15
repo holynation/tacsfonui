@@ -870,5 +870,42 @@ class ModelController extends CI_Controller
 		// exit;
 	}
 
+	public function galleryUpload(){
+		// $ds = DIRECTORY_SEPARATOR;
+		$storeFolder = 'uploads/galleries';
+		if (!empty($_FILES)) {
+			$insertValuesSQL = '';
+			$title = $this->input->post('title',true);
+			$title = (!empty($title)) ? $title : 'Fellowship event';
+			$uploader = $this->input->post('uploader',true);
+
+			$file_ary = reArrange($_FILES['file']);
+			for($i=0; $i<count($file_ary); $i++){
+				$tempFile = $file_ary[$i]['tmp_name'];
+				$fileName = $file_ary[$i]['name'];
+				$targetPath = $storeFolder . '/';
+			    $targetFile =  $targetPath.$fileName;
+
+			    if(move_uploaded_file($tempFile,$targetFile)){
+			    	$insertValuesSQL .= ($insertValuesSQL) ? ",('".$targetFile."', '$uploader','$title')" :  "('".$targetFile."', '$uploader','$title')";
+			    }
+			}
+			$this->moveFilesGalley($insertValuesSQL);
+		}
+	}
+
+	private function moveFilesGalley($filePath){
+	    if(!empty($filePath)){ 
+            // $filePath = trim($filePath, ',');
+            $insert = $this->db->query("INSERT INTO gallery (gallery_path, uploader,title) VALUES $filePath"); 
+        	if($insert){
+        		echo createJsonMessage('status',true,'message','image(s) successfuly uploaded...');
+        		return true;
+        	}
+        	echo createJsonMessage('status',false,'message','error occured while performing the operation...');
+        	return false;
+        }
+	}
+
 
 }

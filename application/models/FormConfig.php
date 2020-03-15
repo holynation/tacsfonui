@@ -68,6 +68,10 @@ class FormConfig extends CI_Model
 			),
 			'audios' =>array(
 				// 'has_upload' => false
+			),
+			'gallery' => array(
+				'show_add' => false,
+				'extra_link' => 'vc/admin/gallery',
 			)
 		//add new entry to this array
 		);
