@@ -262,12 +262,12 @@ public function getModules()
 		'Media&Publicity' => array(
 			'class'=>'fa-media',
 			'children'=>array(
-				'Home Slider' => 'vc/add/slider',
+				'Home Slider' => 'vc/create/slider',
 				'Gallery' => 'vc/admin/gallery',
-				'Audio' => 'vc/add/audios',
-				'Video' => 'vc/add/videos',
-				'Prog. Publicity' => 'vc/add/publicity',
-				'Media Collection' => 'vc/add/media_collection'
+				'Audio' => 'vc/create/audios',
+				'Video' => 'vc/create/videos',
+				'Prog. Events' => 'vc/create/events/single',
+				'Media Collection' => 'vc/create/media_collection'
 			)
 		),
 		'Support' => array(

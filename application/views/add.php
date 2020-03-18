@@ -9,6 +9,7 @@ $showStatus = ($configData && array_key_exists('show_status', $configData))?$con
 $showAddForm = ($configData && array_key_exists('show_add', $configData))?$configData['show_add']:true;
 $submitLabel = ($configData && array_key_exists('submit_label', $configData))?$configData['submit_label']:"Save";
 $extraLink = ($configData && array_key_exists('extra_link', $configData))?$configData['extra_link']:false;
+$extraValue = ($configData && array_key_exists('extra_value', $configData))?$configData['extra_value']:"Add";
 $tableAction = ($configData && array_key_exists('table_action', $configData))?$configData['table_action']:$model::$tableAction;
 $tableExclude = ($configData && array_key_exists('table_exclude', $configData))?$configData['table_exclude']:array();
 $query = ($configData && array_key_exists('query', $configData))?$configData['query']:array();
@@ -103,7 +104,7 @@ $where .= ' order by ID desc ';
 
                         <?php if($extraLink): ?>
                         <div class="col-sm-3">
-                            <a href="<?php echo base_url($extraLink); ?>" class="btn btn-warning"><i class="fa fa-plus"></i> Add <?php echo removeUnderscore($model); ?></a>
+                            <a href="<?php echo base_url($extraLink); ?>" class="btn btn-warning"><i class="fa fa-plus"></i>  <?php echo $extraValue ." ". removeUnderscore($model); ?></a>
                         </div>
                       <?php endif; ?>
 

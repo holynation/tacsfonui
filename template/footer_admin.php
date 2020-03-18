@@ -23,6 +23,7 @@
     <script src="<?php echo base_url(); ?>assets/private/js/jquery.steps.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/dropzone.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/datatables.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/private/js/bootstrap-datepicker.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/main.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/custom.js"></script>
 

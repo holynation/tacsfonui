@@ -20,7 +20,7 @@
                     <div class="col-lg-6">
 	                    <div class="row">
 	                        <div class="col-sm-3">
-	                            <a href="<?php echo base_url('vc/add/gallery'); ?>" class="btn btn-dark"> View Galleries</a>
+	                            <a href="<?php echo base_url('vc/create/gallery'); ?>" class="btn btn-dark"> View Galleries</a>
 	                        </div>
 	                    </div>
                 	</div>

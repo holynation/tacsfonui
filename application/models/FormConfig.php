@@ -72,6 +72,11 @@ class FormConfig extends CI_Model
 			'gallery' => array(
 				'show_add' => false,
 				'extra_link' => 'vc/admin/gallery',
+			),
+			'events' => array(
+				'show_add' => false,
+				'extra_link' => 'vc/create/events',
+				'extra_value' => 'View'
 			)
 		//add new entry to this array
 		);

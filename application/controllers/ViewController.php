@@ -80,12 +80,12 @@ class ViewController extends CI_Controller{
 
     $this->load->model('custom/adminData');
     $role=false;
-    if ($this->webSessionManager->getCurrentUserProp('user_type')=='doctor') {
-      loadClass($this->load,'doctor');
-      $this->doctor->ID = $this->webSessionManager->getCurrentUserProp('user_table_id');
-      $this->doctor->load();
-      $data['doctor']=$this->doctor;
-      $role = $data['doctor']->role;
+    if ($this->webSessionManager->getCurrentUserProp('user_type')=='member') {
+      loadClass($this->load,'member');
+      $this->member->ID = $this->webSessionManager->getCurrentUserProp('user_table_id');
+      $this->member->load();
+      $data['member']=$this->member;
+      $role = $data['member']->role;
     }else {
       loadClass($this->load,'admin');
       $this->admin->ID = $this->webSessionManager->getCurrentUserProp('user_table_id');
@@ -98,15 +98,17 @@ class ViewController extends CI_Controller{
       show_404();exit;
     }
     $path ='vc/admin/'.$page;
+
+    // this approach is use so as to allow this page pass through using a page that is already permitted
     if($page=='permission') {
       $path ='vc/add/role';
     }
 
-    // this approach is use so as to allow this page pass through using a page that is already permitted
-    if($page == 'report'){
-      $path = 'vc/add/appointment';
+    if($page == 'create'){
+      $path = 'vc/create/events';
     }
 
+    // end the permitted page already loaded
     if (!$role->canView($path)) {
       show_access_denied();exit;
     }
@@ -312,7 +314,19 @@ class ViewController extends CI_Controller{
         echo createJsonMessage('status',true,'message',$formContent);exit;
   } 
 
-  public function add($model)
+  // this method is for creation of form either in single or combine based on the page desire
+  public function create($model,$type='add'){
+    if(!empty($type)){
+      if($type=='single'){ // this is the single page
+        $this->add($model,'create');
+      }else{ // this is the combine page
+        $this->add($model,'add');
+      }
+    }
+    return "please specify a type to be created (single or combine)";
+  }
+
+  private function add($model,$type)
   {
 
     $role_id=$this->webSessionManager->getCurrentUserProp('role_id');
@@ -324,12 +338,12 @@ class ViewController extends CI_Controller{
     }
 
     $role =false;
-    if ($userType=='doctor') {
-      loadClass($this->load,'doctor');
-      $this->doctor->ID = $this->webSessionManager->getCurrentUserProp('user_table_id');
-      $this->doctor->load();
-      $role = $this->doctor->role;
-      $data['doctor']=$this->doctor;
+    if ($userType=='member') {
+      loadClass($this->load,'member');
+      $this->member->ID = $this->webSessionManager->getCurrentUserProp('user_table_id');
+      $this->member->load();
+      $role = $this->member->role;
+      $data['member']=$this->member;
     }
     else{
       loadClass($this->load,'admin');
@@ -338,11 +352,15 @@ class ViewController extends CI_Controller{
       $role = $this->admin->role;
       $data['admin']=$this->admin;
       $data['currentRole']=$role;
-      $path ='vc/add/'.$model;
+      $path ="vc/$type/".$model;
 
-      if (!$role->canView($path)) {
-        show_access_denied($this->load);exit;
+      $excludePage = array('create');
+      if(in_array($model, $excludePage)){
+        if (!$role->canView($path)) {
+          show_access_denied($this->load);exit;
+        }
       }
+      
     }
 
     if (!$this->webSessionManager->isSessionActive()) {
@@ -369,7 +387,7 @@ class ViewController extends CI_Controller{
     $formConfig = new formConfig($role);
     $data['configData']=$formConfig->getInsertConfig($model);
     $data['model']=$model;
-    $this->load->view('add',$data);
+    $this->load->view("$type",$data);
   }
 
   function changePassword()

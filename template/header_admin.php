@@ -31,10 +31,8 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/horizontal-timeline.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/weather-icons.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/dropzone.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/ion.rangeSlider.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/ion.rangeSlider.skinFlat.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/datatables.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/fullcalendar.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/style.css">
 
     <!-- Page Level Stylesheets -->
