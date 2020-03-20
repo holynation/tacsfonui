@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CMontserrat:400,500">
 
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/fullcalendar.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/jquery-ui.min.css">

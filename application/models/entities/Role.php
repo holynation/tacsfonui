@@ -266,7 +266,7 @@ public function getModules()
 				'Gallery' => 'vc/admin/gallery',
 				'Audio' => 'vc/create/audios',
 				'Video' => 'vc/create/videos',
-				'Prog. Events' => 'vc/create/events/single',
+				'Prog. Events' => 'vc/admin/events',
 				'Media Collection' => 'vc/create/media_collection'
 			)
 		),
