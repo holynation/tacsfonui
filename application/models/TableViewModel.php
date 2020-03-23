@@ -128,11 +128,13 @@ class TableViewModel extends CI_Model
 				$otherParam = $data->$otherParam;
 				// check if the additional param include the default upload folder
 				// this also means that the uploaded folder would start the directory of the path
-				if(startsWith($otherParam,$this->uploadedFolderName)){
-					$tempParam = explode('/',$otherParam);
-					$otherParam = urlencode(base64_encode($tempParam[2])); // this would be the file name used
+				if(!empty($otherParam)){
+					if(startsWith($otherParam,$this->uploadedFolderName)){
+						$tempParam = explode('/',$otherParam);
+						$otherParam = "/".urlencode(base64_encode($tempParam[2])); // this would be the file name used
+					}
 				}
-				$value = $temp[0] ."/".$otherParam;
+				$value = $temp[0].$otherParam;
 			}
 			$currentid = $data->ID;
 			$link = '';

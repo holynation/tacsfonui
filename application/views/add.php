@@ -246,7 +246,7 @@ $where .= ' order by ID desc ';
         </div>
         <!-- /.modal -->
     </div>
-</main>
+<!-- </main> -->
 <script>
     var inserted=false;
     $(document).ready(function($) {

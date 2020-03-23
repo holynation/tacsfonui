@@ -20,7 +20,7 @@
                     <div class="col-lg-6">
 	                    <div class="row">
 	                        <div class="col-sm-3">
-	                            <a href="<?php echo base_url('vc/create/events'); ?>" class="btn btn-dark"> View Events</a>
+	                            <a href="<?php echo base_url('vc/create/article'); ?>" class="btn btn-dark"> View Article</a>
 	                        </div>
 	                    </div>
                 	</div>
@@ -32,18 +32,18 @@
         <section class="main--content">
             <div class="panel">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Events Calendar</h3>
+                    <h3 class="panel-title">Article</h3>
                 </div>
 
                 <div class="panel-content">
                     <div class="row">
 	                    <div class="col-lg-12">
 	                        <div class="card-box">
-	                            <div class="row">
-	                                <div class="col-lg-12">
-	                                    <div id="calendarApp"></div>
-	                                </div> <!-- end col -->
-	                            </div>  <!-- end row -->
+	                        	<form action="" method="post">
+	                        		<textarea id="summernote_editor" name="summernote_editor">
+	                        			<h6>You can type here articles using this editor...</h6>
+	                        		</textarea>
+	                        	</form> <!-- end summernote-editor-->
 	                        </div> <!-- end card-box-->
 	                    </div>
 	                    <!-- end col-12 -->

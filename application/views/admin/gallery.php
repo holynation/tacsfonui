@@ -67,7 +67,5 @@
             </div>
         </section>
         <!-- Main Content End -->
-    </main>
-    <!-- Main Container End -->
 
 <?php include_once 'template/footer_admin.php'; ?>

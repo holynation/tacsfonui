@@ -1743,6 +1743,7 @@ td.fc-widget-content {
 
 tr:first-child > td > .fc-day-grid-event {
     margin-top: 0;
+    cursor: pointer;
 }
 
 .fc-event > .fc-content {

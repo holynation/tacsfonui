@@ -47,11 +47,11 @@ class ModelController extends CI_Controller
 
 			}
 			//this is to check for the slider model
-			if($model == 'faculty_news'){
-				loadClass($this->load,'faculty_news');
-				$result = $this->faculty_news->checkLimit();
+			if($model == 'slider'){
+				loadClass($this->load,'slider');
+				$result = $this->slider->checkLimit();
 				if($result >= 3){
-					echo createJsonMessage('status',false,'message','sorry, you\'ve reached the limit for faculty news (3)...');
+					echo createJsonMessage('status',false,'message','sorry, you\'ve reached the limit for slider image(s) upload (3)...');
 					return;
 				}
 			}
@@ -897,7 +897,6 @@ class ModelController extends CI_Controller
 
 	private function moveFilesGalley($filePath){
 	    if(!empty($filePath)){ 
-            // $filePath = trim($filePath, ',');
             $insert = $this->db->query("INSERT INTO gallery (gallery_path, uploader,title) VALUES $filePath"); 
         	if($insert){
         		echo createJsonMessage('status',true,'message','image(s) successfuly uploaded...');
@@ -934,7 +933,8 @@ public function calendarLoad()
              "title" => $r->title,
              "description" => $r->description,
              "end" => $r->end,
-             "start" => $r->start
+             "start" => $r->start,
+             "events_path" => $r->events_path
          );
      }
 
@@ -949,10 +949,29 @@ public function add_event()
     $desc = $this->input->post("description", TRUE);
     $start_date = $this->input->post("start_date", TRUE);
     $end_date = $this->input->post("end_date", TRUE);
+    $filePath = '';
+
+    if (!empty($_FILES)) {
+    	$storeFolder = 'uploads/events';
+    	if(!is_dir($storeFolder)){
+    		@mkdir($storeFolder, 0777,true);
+    	}
+    	$files = $_FILES['events_path'];
+    	$fileName = $files['name'];
+    	$fileTmp = $files['tmp_name'];
+    	$targetPath = $storeFolder . '/';
+    	$ext = strtolower(pathinfo($fileName,PATHINFO_EXTENSION));
+		$newFileName = $this->webSessionManager->getCurrentuserProp('user_table_id').'_'.uniqid()."_".date('Y-m-d').'.'.$ext;
+    	$targetFile = $targetPath.$newFileName;
+    	if(move_uploaded_file($fileTmp,$targetFile)){
+	    	$filePath = $targetFile;
+	    }
+    }
+    
 
     if(!empty($start_date)) {
-       $sd = DateTime::createFromFormat("Y/m/d H:i", $start_date);
-       $start_date = $sd->format('Y-m-d H:i:s');
+       $sd = DateTime::createFromFormat("Y-m-d H:i:s", $start_date);
+       $start_date = $sd->format("Y-m-d H:i:s");
        $start_date_timestamp = $sd->getTimestamp();
     } else {
        $start_date = date("Y-m-d H:i:s", time());
@@ -960,7 +979,7 @@ public function add_event()
     }
 
     if(!empty($end_date)) {
-       $ed = DateTime::createFromFormat("Y/m/d H:i", $end_date);
+       $ed = DateTime::createFromFormat("Y-m-d H:i:s", $end_date);
        $end_date = $ed->format('Y-m-d H:i:s');
        $end_date_timestamp = $ed->getTimestamp();
     } else {
@@ -972,33 +991,99 @@ public function add_event()
        "title" => $name,
        "description" => $desc,
        "start" => $start_date,
-       "end" => $end_date
+       "end" => $end_date,
+       "events_path" => $filePath
        )
     );
 
     redirect(site_url("vc/admin/events"));
 }
- function calendarUpdate()
- {
-  if($this->input->post('id'))
-  {
-   $data = array(
-    'title'   => $this->input->post('title'),
-    'start_event' => $this->input->post('start'),
-    'end_event'  => $this->input->post('end')
-   );
 
-   $this->modelCalendar->update_event($data, $this->input->post('id'));
-  }
- }
+public function edit_event()
+{
+      $eventid = intval($this->input->post("eventid"));
+      $event = $this->modelCalendar->get_event($eventid);
+      if($event->num_rows() == 0) {
+           echo"Invalid Event";
+           exit();
+      }
 
- function calendarDelete()
- {
-  if($this->input->post('id'))
-  {
-   $this->modelCalendar->delete_event($this->input->post('id'));
-  }
- }
+      $event->row();
+
+      /* Our calendar data */
+      $name = html_escape($this->input->post("name"));
+      $desc = html_escape($this->input->post("description"));
+      $start_date = html_escape($this->input->post("start_date"));
+      $end_date = html_escape($this->input->post("end_date"));
+      $delete = intval($this->input->post("delete"));
+      $oldFilePath = trim($this->input->post("eventPath"));
+      $filePath = "";
+
+      	if(!$delete) {
+
+           if(!empty($start_date)) {
+                $sd = DateTime::createFromFormat("Y-m-d H:i:s", $start_date);
+                $start_date = $sd->format('Y-m-d H:i:s');
+                $start_date_timestamp = $sd->getTimestamp();
+           } else {
+                $start_date = date("Y-m-d H:i:s", time());
+                $start_date_timestamp = time();
+           }
+
+           if(!empty($end_date)) {
+                $ed = DateTime::createFromFormat("Y-m-d H:i:s", $end_date);
+                $end_date = $ed->format('Y-m-d H:i:s');
+                $end_date_timestamp = $ed->getTimestamp();
+           } else {
+                $end_date = date("Y-m-d H:i:s", time());
+                $end_date_timestamp = time();
+           }
+
+           	if (!empty($_FILES)) {
+           		$storeFolder = 'uploads/events';
+		    	if(!is_dir($storeFolder)){
+		    		@mkdir($storeFolder, 0777,true);
+		    	}
+
+    			$this->removeFile($oldFilePath);
+		    	
+		    	$files = $_FILES['events_path'];
+		    	$fileName = $files['name'];
+		    	$fileTmp = $files['tmp_name'];
+		    	$targetPath = $storeFolder . '/';
+		    	$ext = strtolower(pathinfo($fileName,PATHINFO_EXTENSION));
+		    	$newFileName = $this->webSessionManager->getCurrentuserProp('user_table_id').'_'.uniqid()."_".date('Y-m-d').'.'.$ext;
+		    	$oldFilePath = ($oldFilePath) ? pathinfo($oldFilePath,PATHINFO_FILENAME) : $newFileName;
+		    	$targetFile = $targetPath.$oldFilePath;
+		    	if(move_uploaded_file($fileTmp,$targetFile)){
+			    	$filePath = $targetFile;
+			    }
+		    }
+
+           	$this->modelCalendar->update_event($eventid, array(
+                "title" => $name,
+                "description" => $desc,
+                "start" => $start_date,
+                "end" => $end_date,
+                "events_path" => $filePath
+                )
+           	);
+
+	    }else {
+	    	$this->removeFile($oldFilePath);
+	        $this->modelCalendar->delete_event($eventid);
+	    }
+
+      redirect(site_url("vc/admin/events"));
+}
+
+private function removeFile($path){
+	if(file_exists($path)){
+		@chmod($path, 0777);
+		@unlink($path);
+		return true;
+	}
+}
 
 
 }

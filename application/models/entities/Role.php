@@ -176,10 +176,10 @@ public function checkWritePermission(){
 		$admin->load();
 		$role = $admin->role;
 		//get the page referer and use it as the
-		$path = $_SERVER['HTTP_REFERER'];
+		$path = @$_SERVER['HTTP_REFERER'];
 		$path = $this->extractBase($path);
 		if (strpos($path, 'vc/member/profile/')===false) {
-			$path='vc/add/patients';
+			$path='vc/add/member';
 		}
 		if (strpos($path, 'vc/admin/profile/')===false) {
 			$path='vc/add/admin';
@@ -239,9 +239,9 @@ public function getModules()
 		'Profile'=>array(
 			'class'=>'fa-users',
 			'children'=>array(
-				'Admin'=>'vc/add/admin',
-				'Member'=>'vc/add/member',
-				'Role'=>'vc/add/role'
+				'Admin'=>'vc/create/admin',
+				'Member'=>'vc/create/member',
+				'Role'=>'vc/create/role'
 			)
 		),
 		'Settings'=>array(

@@ -318,13 +318,14 @@
 					$ajax =$value[2];
 				}
 				else{
-				$criticalArray = array('delete','disable','reset password','remove');
-				if (in_array(strtolower($key), $criticalArray)) {
-					$critical =1;
+					$criticalArray = array('delete','disable','reset password','remove');
+					if (in_array(strtolower($key), $criticalArray)) {
+						$critical =1;
+					}
+					$link = endsWith($value,'=')?($value.$id):($value.'/'.$id);
+					$link = base_url($link);
 				}
-				$link = endsWith($value,'=')?($value.$id):($value.'/'.$id);
-				$link = base_url($link);
-				}
+				
 				$editClass='';
 				if($label=='edit' || $label=='update'){
 					$editClass = "data-ajax-edit='1'";

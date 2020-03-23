@@ -21,19 +21,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CMontserrat:400,500">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/fullcalendar.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/libs/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/libs/fullcalendar/fullcalendar.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/jquery-ui.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/perfect-scrollbar.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/morris.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/select2.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/jquery-jvectormap.min.css">
+    <!-- <link rel="stylesheet" href="<?php //echo base_url(); ?>assets/private/css/jquery-jvectormap.min.css"> -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/horizontal-timeline.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/weather-icons.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/dropzone.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/datatables.min.css">
+    <!-- <link rel="stylesheet" href="<?php //echo base_url(); ?>assets/private/css/datatables.min.css"> -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/libs/jquery-datetime-picker/jquery.datetimepicker.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/style.css">
 
     <!-- Page Level Stylesheets -->

@@ -713,7 +713,7 @@ function filePreview(form){
        file    = document.querySelector('input[type=file]').files[0];
        if(preview == null){
         var tempPreview = document.querySelector("input[type='file']").previousElementSibling;
-         if(tempPreview.tagName.toLowerCase() == 'img'){
+         if(tempPreview.tagName.toLowerCase() == 'img' || tempPreview == null){
           preview = tempPreview;
          }else{
             $("input[type='file']").after("<img src='' alt='image' width ='80%' height='50%' style='margin-top:10px;' />");
