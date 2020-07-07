@@ -178,12 +178,12 @@ public function checkWritePermission(){
 		//get the page referer and use it as the
 		$path = @$_SERVER['HTTP_REFERER'];
 		$path = $this->extractBase($path);
-		if (strpos($path, 'vc/member/profile/')===false) {
-			$path='vc/add/member';
-		}
-		if (strpos($path, 'vc/admin/profile/')===false) {
-			$path='vc/add/admin';
-		}
+		// if (strpos($path, 'vc/member/profile/')===false) {
+		// 	$path='vc/add/member';
+		// }
+		// if (strpos($path, 'vc/admin/profile/')===false) {
+		// 	$path='vc/add/admin';
+		// }
 		if (!$role->canWrite($path)) {
 		  echo createJsonMessage('status',false,'message','sorry,you do not have permission to perform operation');exit;
 		}
@@ -253,9 +253,9 @@ public function getModules()
 		'Editorial'=>array(
 			'class'=> 'fa-book',
 			'children'=>array(
-				'Article' => 'vc/admin/article',
-				'BulletIn' => 'vc/admin/bulletin',
-				'Secretariat' => 'vc/add/secretariat'
+				'Article' => 'vc/create/article',
+				// 'BulletIn' => 'vc/admin/bulletin',
+				// 'Secretariat' => 'vc/add/secretariat'
 
 			)
 		),

@@ -96,7 +96,8 @@ h4 {
 h5 {
 	font-size:18px;
 	margin: 20px 0 13px;
-	color: #384047;
+	/*color: #384047;*/
+	color: inherit;
 }
 h6 {
 	font-size:16px;
@@ -415,7 +416,7 @@ left: 0;
 }
  @media (max-width:480px) {
 .carousel-caption {
-top: 25%;
+top: 20%;
 }
 }
 /* Declare heights because of positioning of img element */
@@ -432,18 +433,7 @@ top: 25%;
 .carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
 	top:55%;
 }
-.slide-one {
-	background:url(../images/church-mountain-bg.jpg) no-repeat;
-	background-size:cover;
-}
-.slide-two {
-	background:url(../images/church-man-sea.jpg) no-repeat;
-	background-size:cover;
-}
-.slide-three {
-	background:url(../images/church-man-hope.jpg) no-repeat;
-	background-size:cover;
-}
+
 
 
 /*========== 4. UPCOMING EVENT ==============*/
@@ -740,7 +730,7 @@ a.list-group-item:hover, a.list-group-item:focus {
 
 .img-gallery .fancybox img {
 	margin:0 auto;
-	margin-bottom:30px;
+	margin-bottom:10px;
 }
 /*========== 11. BIBLE QUOTES ==============*/
 
@@ -1157,5 +1147,12 @@ background-color: #D3CFCC;
         opacity: 1;
         transform: translateY(0)
     }
+}
+
+/*about page style*/
+
+.mission-list > li{
+	font-size:16.5px;
+	letter-spacing: 0.4px;
 }
 

@@ -54,10 +54,12 @@
 			$id = ($id == '') ? $extra : $id;
 			$extra = ($extra != '' && $id != '') ? base64_decode(urldecode($extra)) : $id;
 			// this extra param is a method to find a file and removing it from the server
+			// i wanna find a way of deleting file that is more than one in the uploads directory for model
 			if($extra){
 				$this->load->model("entities/$model");
 				$paramFile = $model::$documentField;
-				$directoryName = $model.'_path';
+				$defaultDirectory = $model.'_path';
+				$directoryName = (isset($defaultDirectory)) ? $tempDirectory : $model.'_directory';
 				$filePath =  $this->uploadedFolderName.'/'.@$paramFile[$directoryName]['directory'].$extra;
 				if(file_exists($filePath)){
 					@chmod($filePath, 0777);

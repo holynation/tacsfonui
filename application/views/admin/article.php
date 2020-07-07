@@ -39,10 +39,15 @@
                     <div class="row">
 	                    <div class="col-lg-12">
 	                        <div class="card-box">
-	                        	<form action="" method="post">
-	                        		<textarea id="summernote_editor" name="summernote_editor">
-	                        			<h6>You can type here articles using this editor...</h6>
-	                        		</textarea>
+	                        	<form action="<?php echo base_url('modelController/articlePost'); ?>" method="post" enctype="multipart/form-data">
+	                        		<div class="form-group">
+	                        			<textarea id="summernote_editor" name="summernote_editor">
+	                        				<!-- <h6>You can type here articles using this editor...</h6> -->
+	                        			</textarea>
+	                        		</div>
+	                        		<div class="form-group">
+	                        			<button type="submit" name="btnArticle" class="btn btn-success waves-effect waves-light float-right">Publish Article</button>
+	                        		</div>
 	                        	</form> <!-- end summernote-editor-->
 	                        </div> <!-- end card-box-->
 	                    </div>
@@ -52,5 +57,13 @@
             </div>
         </section>
         <!-- Main Content End -->
+
+ <script type="text/javascript" charset="utf-8" async defer>
+ 	var postForm = function() {
+		var content = $('textarea[name="content"]').html($('#summernote').code());
+		console.log(content);return
+		return content;
+	}	
+ </script>
 
 <?php include_once 'template/footer_admin.php'; ?>

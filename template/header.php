@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +14,7 @@
 <!-- Church Template CSS -->
 <link href="<?php echo base_url(); ?>assets/public/css/church.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/public/css/fancybox.css" rel="stylesheet">
+<!-- <link rel="stylesheet"  href="<?php echo base_url(); ?>assets/public/css/slider.php" media="screen"> -->
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="js/html5shiv.js"></script>
@@ -39,34 +39,25 @@
       <a class="navbar-brand" href="index.html"> <img src="<?php echo base_url(); ?>assets/public/images/church-logo.png" alt="church logo" class="img-responsive"></a> </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown active"><a href="#" class="dropdown-toggle" data-toggle="dropdown">HOME <span class="caret"></span></a>
-<ul class="dropdown-menu dropdown-menu-left" role="menu">
-           <li><a href="index.html">Home Default</a></li>
-            <li><a href="index-slider-alt.html">Home Animated Slider</a></li>
-          </ul>
+        <li class="dropdown active"><a href="<?php echo base_url(); ?> ">HOME</a>
         </li>
-        <li><a href="about.html">ABOUT</a></li>
-        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">MINISTRY <span class="caret"></span></a>
+        <li><a href="<?php echo base_url('broadcast/about'); ?>">ABOUT</a></li>
+        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Media <span class="caret"></span></a>
           <ul class="dropdown-menu dropdown-menu-left" role="menu">
-            <li><a href="ministry.html">Childrens Ministry</a></li>
-            <li><a href="ministry.html">Students Ministry</a></li>
-            <li><a href="ministry.html">Groups</a></li>
+            <li><a href="<?php echo base_url('broadcast/audio'); ?>">Audio</a></li>
+            <li><a href="sermons.html">Drama</a></li>
           </ul>
         </li>
-        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">SERMONS <span class="caret"></span></a>
-          <ul class="dropdown-menu dropdown-menu-left" role="menu">
-            <li><a href="sermons.html">Christ-Occupied</a></li>
-            <li><a href="sermons.html">God's Love</a></li>
-            <li><a href="sermons.html">Faithfulness</a></li>
-            <li><a href="sermons.html">Praise Him</a></li>
-          </ul>
-        </li>
-        <li><a href="contact.html">CONTACT</a></li>
-        <li><a href="<?php echo base_url('welcome/login'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> SIGN IN</a></li>
+        <li><a href="<?php echo base_url('broadcast/events'); ?>">Events</a></li>
+        <li><a href="<?php echo base_url('broadcast/contact'); ?>">CONTACT</a></li>
+        <li><a href="<?php echo base_url('broadcast/login'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> SIGN IN</a></li>
       </ul>
     </div>
     <!--/.nav-collapse --> 
-    
   </div>
 </div>
 <!--// Navbar Ends--> 
+<?php
+  // print_r(getSliders());exit;
+include_once("assets/public/css/slider.php");
+?>

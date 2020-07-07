@@ -1085,5 +1085,12 @@ private function removeFile($path){
 	}
 }
 
+public function articlePost(){
+	$data = $_POST['summernote_editor'];
+	file_put_contents('uploads/filename.png', base64_decode($data));
+	print_r($data);
+	exit;
+}
+
 
 }

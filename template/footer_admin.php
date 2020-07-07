@@ -190,10 +190,12 @@
 
 $(document).ready(function(){
     $('#summernote_editor').summernote({
+        placeholder: "You can type here articles using this editor...",
         height: 250,                 // set editor height
         minHeight: null,             // set minimum height of editor
         maxHeight: null,             // set maximum height of editor
-        focus: true                 // set focus to editable area after initializing summernote
+        focus: true,                // set focus to editable area after initializing summernote
+        
     });
 });
 

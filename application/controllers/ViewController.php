@@ -23,6 +23,7 @@ class ViewController extends CI_Controller{
       header("Location:".base_url());exit;
     }
 	}
+
 // bootsrapping functions 
   public function view($model,$page='index',$third='',$fourth=''){
     if ( !(file_exists("application/views/$model/") && file_exists("application/views/$model/$page".'.php')))

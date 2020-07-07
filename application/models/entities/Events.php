@@ -26,7 +26,7 @@ static $defaultArray = array();
 //the folder to save must represent a path from the basepath. it should be a relative path,preserve filename will be either true or false. when true,the file will be uploaded with it default filename else the system will pick the current user id in the session as the name of the file.
 static $documentField = array('events_path'=>array('type'=>array('jpeg','jpg','png','gif'),'size'=>'1048576','directory'=>'events/','preserve'=>false)); //array containing an associative array of field that should be regareded as document field. it will contain the setting for max size and data type.;
 static $relation = array();
-static $tableAction = array('delete' => array('delete/events','events_path'));
+static $tableAction = array('edit'=> 'edit/events','delete' => array('delete/events','events_path'));
 function __construct($array = array())
 {
 	parent::__construct($array);
@@ -53,7 +53,7 @@ function getTitleFormField($value = ''){
  function getDescriptionFormField($value = ''){
 	return "<div class='form-group'>
 				<label for='description'>Description</label>
-				<input type='text' name='description' id='description' value='$value' class='form-control' required />
+				<textarea name='description' id='description' class='form-control' required>$value</textarea>
 			</div>";
 } 
  function getEvents_pathFormField($value = ''){
@@ -65,7 +65,15 @@ function getTitleFormField($value = ''){
 </div> ";
 } 
 
-
+public function getEvents($param=null){
+	$param = ($param) ? " $param " : "";
+	$query = "select * from events $param";
+	$result = $this->query($query);
+	if(!$result){
+		return false;
+	}
+	return $result;
+}
  
 }
 

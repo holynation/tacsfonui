@@ -85,7 +85,6 @@ $where .= ' order by ID desc ';
                         <li class="breadcrumb-item"><span>Administrative <small><?php echo removeUnderscore($model); ?></small></span></li>
                     </ul>
                 </div>
-
               
                 <div class="col-lg-6">
                     <!-- Create model -->
@@ -95,11 +94,11 @@ $where .= ' order by ID desc ';
                             <a href="javascript:void(0);" class="btn btn-warning" data-toggle='modal' data-target='#modal-add'><i class="fa fa-plus"></i> Add <?php echo removeUnderscore($model); ?></a>
                         </div>
 
-                        <div class="col-sm-3 ml-4">
+                        <!-- <div class="col-sm-3 ml-4">
                           <div>
                             <button type="button" class="btn btn-dark" data-toggle='modal' data-target='#modal-upload' data-animate-modal="zoomInDown">Batch Upload</button>
                           </div>
-                        </div>
+                        </div> -->
                       <?php endif; ?>
 
                         <?php if($extraLink): ?>
@@ -289,6 +288,6 @@ $where .= ' order by ID desc ';
         location.reload();
       }
     }
-  </script>
+</script>
 
 <?php include_once 'template/footer_admin.php'; ?>

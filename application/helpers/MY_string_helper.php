@@ -1,5 +1,14 @@
 <?php 
 	
+	function getSliders(){
+		$obj = &get_instance();
+		loadClass($obj->load,'slider');
+		$result = $obj->slider->allNonObject();
+		if(!$result){
+			return false;
+		}
+		return $result;
+	}
 	function getTitlePage($page = ''){
 		return ($page != '') ? "TACSFON - Household of Refuge | $page" : "TACSFON - Household of Refuge";
 	}
@@ -265,7 +274,7 @@
 	//function to covert to local time reading
 	function localTimeRead($dateTime){
 		$date = date_create($dateTime);
-		return date_format($date, 'G:ia');
+		return date_format($date, 'h:ia');
 	}
 
 	// function to get date difference
@@ -281,6 +290,20 @@
 	}
 
 	//function to format a date
+	function formatMonthDay($posted){
+ 		if($posted){
+ 			$date = strftime("%d %B ", strtotime($posted));
+ 		    return $date;
+ 		}
+ 		return false;	
+ 	}
+ 	function formatDay($posted){
+ 		if($posted){
+ 			$date = strftime("%A ", strtotime($posted));
+ 		    return $date;
+ 		}
+ 		return false;	
+ 	}
 	function dateFormatter($posted){
  		if($posted){
  			$date = strftime("%d %B, %Y", strtotime($posted));

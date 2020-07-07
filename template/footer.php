@@ -9,20 +9,20 @@
       <div class="col-sm-6 col-md-3">
         <h5>QUICK LINKS</h5>
         <ul class="footer-links">
-          <li><a href="#">Upcoming events</a></li>
-          <li><a href="#">Ministries</a></li>
-          <li><a href="#">Recent Sermons</a></li>
-          <li><a href="#">Contact us</a></li>
+          <li><a href="<?php echo base_url('broadcast/events'); ?>">Upcoming events</a></li>
+          <li><a href="<?php echo base_url('broadcast/audio'); ?>">Recent Audios</a></li>
+          <li><a href="<?php echo base_url('broadcast/contact'); ?>">Contact us</a></li>
         </ul>
       </div>
       <div class="col-sm-6 col-md-3">
         <h5>OUR ADDRESS</h5>
-        <p> Catholic Church<br>
-          121 King Street, Melbourne <br>
-          Victoria 3000 Australia<br>
+        <p> TACSFON UI,<br>
+          Abadina Primary School III, <br>
+          University Of Ibadan,<br>
+          Ibadan, Oyo State, Nigeria.
           <br>
-          Phone: +61 3 8376 6284<br>
-          Email: <a href="#">mail@catholicwebsite.com</a></p>
+          Phone: +234 816 824 8585<br>
+          Email: <a href="mailto:mail@tacsfonui.org">mail@tacsfonui.org</a></p>
       </div>
       <div class="col-sm-6 col-md-3">
         <h5>CONNECT</h5>
@@ -32,7 +32,7 @@
   </div>
   <div class="copyright">
     <div class="container">
-      <p class="text-center">Copyright © 2014 All rights reserved</p>
+      <p class="text-center">Copyright © <?php echo date('Y'); ?> All rights reserved</p>
     </div>
   </div>
 </footer>
