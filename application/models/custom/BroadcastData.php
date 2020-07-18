@@ -30,7 +30,7 @@ class BroadcastData extends CI_Model
 		$result['extraAudios'] = $this->audios->allNonObject($totalRow,false,0,7,"order by date_created desc");
 		$result['audios'] = $this->audios->allNonObject($totalRow,false,0,6,'order by date_created desc');
 		$result['events'] = $this->events->getEvents(" order by start desc limit 8");
-		$result['galleries'] = $this->gallery->allNonObject($totalRow,false,0,8,"order by ID desc");
+		$result['galleries'] = $this->gallery->allNonObject($totalRow,false,0,8," where display_type = 'home' order by ID desc");
 		$result['articles'] = $this->article->allNonObject($totalRow,false,0,8,"order by date_created desc");
 		return $result;
 	}

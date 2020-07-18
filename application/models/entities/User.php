@@ -166,7 +166,7 @@ public function updatePassword($email=null,$password=null)
 
 public function find($user = null){
 	if($user){
-		$field = (is_numeric($user)) ? 'id' : 'username';
+		$field = (is_numeric($user)) ? 'ID' : 'username';
 	    $data = $this->db->get_where('user', array($field => $user));
 	 
 	   if($data->num_rows() > 0){

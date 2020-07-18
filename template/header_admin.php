@@ -21,19 +21,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CMontserrat:400,500">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/libs/summernote/summernote-bs4.css">
+    <!-- <link rel="stylesheet" href="<?php //echo base_url(); ?>assets/private/libs/summernote/summernote-bs4.css"> -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/libs/fullcalendar/fullcalendar.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/jquery-ui.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/perfect-scrollbar.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/morris.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/select2.min.css">
-    <!-- <link rel="stylesheet" href="<?php //echo base_url(); ?>assets/private/css/jquery-jvectormap.min.css"> -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/horizontal-timeline.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/weather-icons.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/dropzone.min.css">
-    <!-- <link rel="stylesheet" href="<?php //echo base_url(); ?>assets/private/css/datatables.min.css"> -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/libs/jquery-datetime-picker/jquery.datetimepicker.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/private/css/style.css">
@@ -51,7 +46,7 @@
             <div class="navbar--header">
                 <!-- Logo Start -->
                 <a href="<?php echo base_url(); ?>" class="logo">
-                    <img src="<?php echo base_url(); ?>assets/private/img/logo.png" alt="">
+                    <img src="<?php echo base_url(); ?>assets/logo.jpg" alt="" width="60" height="60">
                 </a>
                 <!-- Logo End -->
 
@@ -71,54 +66,46 @@
 
             <!-- Navbar Search Start -->
             <div class="navbar--search">
-                <form action="search-results.html">
+               <!--  <form action="search-results.html">
                     <input type="search" name="search" class="form-control" placeholder="Search Something..." required>
                     <button class="btn-link"><i class="fa fa-search"></i></button>
-                </form>
+                </form> -->
             </div>
             <!-- Navbar Search End -->
+
+            <?php
+                $userType=$this->webSessionManager->getCurrentUserProp('user_type');
+                $userImage='assets/private/img/avatars/01_80x80.png';
+                $userProfile='';
+                $userName='';
+                if($userType == 'admin'){
+                    $userName = $admin->firstname .' '. $admin->lastname;
+                    $userImage = ($admin->admin_path != '') ? $admin->admin_path: $userImage;
+                    $userProfile= 'vc/admin/profile';
+                }
+                
+            ?>
 
             <div class="navbar--nav ml-auto">
                 <ul class="nav">
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="fa fa-bell"></i>
-                            <span class="badge text-white bg-blue">7</span>
+                            <span class="badge text-white bg-blue"></span>
                         </a>
                     </li>
-
-                    <!-- Nav Language Start -->
-                    <li class="nav-item dropdown nav-language">
-                        <a href="#" class="nav-link" data-toggle="dropdown">
-                            <img src="assets/img/flags/us.png" alt="">
-                            <span>English</span>
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="">
-                                    <img src="assets/img/flags/us.png" alt="">
-                                    <span>English</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- Nav Language End -->
 
                     <!-- Nav User Start -->
                     <li class="nav-item dropdown nav--user online">
                         <a href="#" class="nav-link" data-toggle="dropdown">
-                            <img src="<?php echo base_url(); ?>assets/private/img/avatars/01_80x80.png" alt="" class="rounded-circle">
-                            <span>Henry Foster</span>
+                            <img src="<?php echo base_url($userImage); ?>" alt="" class="rounded-circle">
+                            <span><?php echo $userName; ?></span>
                             <i class="fa fa-angle-down"></i>
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="profile.html"><i class="far fa-user"></i>Profile</a></li>
-                            <li><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
+                            <li><a href="<?php echo base_url($userProfile); ?>"><i class="far fa-user"></i>Profile</a></li>
                             <li class="dropdown-divider"></li>
-                            <li><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
                             <li><a href="<?php echo base_url('auth/logout'); ?>"><i class="fa fa-power-off"></i>Logout</a></li>
                         </ul>
                     </li>

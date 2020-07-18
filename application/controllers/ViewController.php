@@ -147,66 +147,8 @@ class ViewController extends CI_Controller{
     $admin = new Admin();
     $admin->ID=$this->webSessionManager->getCurrentUserProp('user_table_id');
     $admin->load();
+    $data['memberCount'] = $this->admin->getDasboardCount('member','member_total');
     $data['admin']=$admin;
-  }
-
-  private function adminReport(&$data)
-  {
-    // if($data['id']){
-      loadClass($this->load, 'configure_report');
-      $apt = (@$_GET['apt']) ? urldecode(trim($_GET['apt'])) : $this->uri->segment(4,0);
-      echo $apt;
-      $apt_id = (@$_GET['apt_id']) ? urldecode(trim($_GET['apt_id'])) : $this->uri->segment(5,0);
-      $result = $this->adminData->getSymptomReport($apt_id,$apt);
-      if($result){
-        $symptoms = $this->adminData->getPatientSymptoms($apt_id,$apt);
-        $data['symptoms'] = $symptoms;
-        $data['reports'] = $result;
-      }else{
-        exit('REPORT CAN NOT BE DETERMINE YET...');
-      }
-     
-    // }
-  }
-
-  private function adminDiagnose(&$data){
-    $patient = (isset($_GET['patient']) && $_GET['patient'])?$_GET['patient']:false;
-    // if(!isset($_GET['patient']) && $_GET['patient']){
-    //   exit("please ensure patient is selected, kindly go back and try again.");
-    // }
-    $hash = $this->uri->segment(4, 0);
-    $result = $this->adminData->getSymptoms();
-    $data['appoint_id'] = $data['id'];
-    $data['appoint_hash'] = $hash;
-    $data['symptoms'] = $result;
-  }
-
-  private function doctor($page,&$data){
-    $this->load->model('custom/doctorData');
-    loadClass($this->load,'doctor');
-    $id = $this->webSessionManager->getCurrentUserProp('user_table_id');
-    $this->doctor = new Doctor(array('ID'=>$id));
-    $this->doctor->load();
-    $data['doctor'] = $this->doctor;
-  }
-
-  private function doctorDashboard(&$data){
-    $data = array_merge($data,$this->doctorData->loadDashboardData());
-  }
-
-  private function doctorProfile(&$data){
-    if ($this->webSessionManager->getCurrentUserProp('user_type')=='admin') {
-      $this->admin('profile',$data);
-      if (!isset($data['id']) || !$data['id']) {
-        show_404();exit;
-      }
-      $doctor = new Doctor(array('ID'=>$data['id']));
-      if (!$doctor->load()) {
-        show_404();exit;
-      }
-      $data['doctor']=$doctor;
-      $data['extra']=true;
-    }
   }
 
   private function patients($page,&$data){
@@ -394,16 +336,16 @@ class ViewController extends CI_Controller{
   function changePassword()
   {
     if(isset($_POST) && count($_POST) > 0 && !empty($_POST)){
-      $curr_password = trim($_POST['data_current_password']);
-      $new = trim($_POST['data_password']);
-      $confirm = trim($_POST['data_confirm_password']);
+      $curr_password = trim($_POST['current_password']);
+      $new = trim($_POST['password']);
+      $confirm = trim($_POST['confirm_password']);
 
       if (!isNotEmpty($curr_password,$new,$confirm)) {
         echo createJsonMessage('status',false,'message',"empty field detected.please fill all required field and try again");
         return;
       }
       
-      $id=$this->webSessionManager->getCurrentUserProp('ID');
+      $id= ($_POST['userID'] != '') ? $_POST['userID'] : $this->webSessionManager->getCurrentUserProp('ID');
       $this->load->model('entities/user');
       if($this->user->find($id)){
         $check = md5(trim($curr_password)) == $this->user->data()[0]['password'];

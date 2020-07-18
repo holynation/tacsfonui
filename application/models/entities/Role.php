@@ -236,7 +236,7 @@ public function getModules()
 				'Profile' => 'vc/admin/profile'
 			)
 		),
-		'Profile'=>array(
+		'Users'=>array(
 			'class'=>'fa-users',
 			'children'=>array(
 				'Admin'=>'vc/create/admin',
@@ -244,12 +244,12 @@ public function getModules()
 				'Role'=>'vc/create/role'
 			)
 		),
-		'Settings'=>array(
-			'class'=>'fa-cog',
-			'children'=>array(
-				'Page Title' => 'vc/add/title',
-			)
-		),
+		// 'Settings'=>array(
+		// 	'class'=>'fa-cog',
+		// 	'children'=>array(
+		// 		'Page Title' => 'vc/add/title',
+		// 	)
+		// ),
 		'Editorial'=>array(
 			'class'=> 'fa-book',
 			'children'=>array(
@@ -260,7 +260,7 @@ public function getModules()
 			)
 		),
 		'Media&Publicity' => array(
-			'class'=>'fa-media',
+			'class'=>'fa-file',
 			'children'=>array(
 				'Home Slider' => 'vc/create/slider',
 				'Gallery' => 'vc/admin/gallery',
@@ -270,16 +270,14 @@ public function getModules()
 				'Media Collection' => 'vc/create/media_collection'
 			)
 		),
-		'Support' => array(
-			'class' => 'fa-tachometer',
-			'children' => array(
-				'Article' => 'vc/add/approve_article',
-				'Donation' => 'vc/add/approve_donation',
-				'Birthday' => 'vc/add/birthday',
-				'Subscription' => 'vc/add/subscription'
-
-			)
-		)
+		// 'Support' => array(
+		// 	'class' => 'fa-tachometer',
+		// 	'children' => array(
+		// 		'Donation' => 'vc/add/approve_donation',
+		// 		'Birthday' => 'vc/add/birthday',
+		// 		'Subscription' => 'vc/add/subscription'
+		// 	)
+		// )
 
 	);
 	return $result;

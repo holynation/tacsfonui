@@ -79,7 +79,7 @@ function getAudios_directoryFormField($value=''){
 				<div class='col-md-9'>
 				<label class='custom-file'>
 					<img src='$path' alt='audio image' class='img-responsive' width='25%'/>
-					<input type='file' name='audios_directory' id='audios_directory' class='custom-file-input' required $disabled />
+					<input type='file' name='audios_directory' id='audios_directory' class='custom-file-input' $disabled />
 					<span class='custom-file-label'>Choose Image File</span>
 				</label></div>
 			</div>";

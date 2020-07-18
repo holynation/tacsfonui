@@ -60,6 +60,13 @@ class Broadcast extends CI_Controller {
 		$this->load->view('broadcast/events',$data);
 	}
 
+	public function gallery(){
+		$data = array();
+		loadClass($this->load,'gallery');
+		$data['galleries'] = $this->gallery->allNonObject($totalRow,false,0,20," where display_type = 'gallery' order by date_created desc");
+		$this->load->view('broadcast/gallery',$data);
+	}
+
 	public function audio($id=null){
 		$data = array();
 		loadClass($this->load,'audios');
@@ -73,6 +80,21 @@ class Broadcast extends CI_Controller {
 		$data['param'] = $param;
 		$data['audios'] = $this->audios->allNonObject($totalRow,false,0,20," $where order by date_created desc");
 		$this->load->view('broadcast/audio',$data);
+	}
+
+	public function drama($id=null){
+		$data = array();
+		loadClass($this->load,'videos');
+		$where='';
+		$param = 'many';
+		// if(!is_null($id)){
+		// 	$param = 'single';
+		// 	$where = " where ID = '$id'";
+		// 	$data['extraAudios'] = $this->audios->allNonObject($totalRow,false,0,7,"order by date_created desc");
+		// }
+		$data['param'] = $param;
+		$data['videos'] = $this->videos->allNonObject($totalRow,false,0,20," $where order by date_created desc");
+		$this->load->view('broadcast/drama',$data);
 	}
 
 	public function login(){

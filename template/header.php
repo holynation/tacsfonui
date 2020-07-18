@@ -11,10 +11,10 @@
 
 <!-- Bootstrap core CSS -->
 <link href="<?php echo base_url(); ?>assets/public/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>assets/public/css/font-awesome.min.css" rel="stylesheet">
 <!-- Church Template CSS -->
 <link href="<?php echo base_url(); ?>assets/public/css/church.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/public/css/fancybox.css" rel="stylesheet">
-<!-- <link rel="stylesheet"  href="<?php echo base_url(); ?>assets/public/css/slider.php" media="screen"> -->
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="js/html5shiv.js"></script>
@@ -36,19 +36,20 @@
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-      <a class="navbar-brand" href="index.html"> <img src="<?php echo base_url(); ?>assets/public/images/church-logo.png" alt="church logo" class="img-responsive"></a> </div>
-    <div class="navbar-collapse collapse">
+      <a class="navbar-brand" href="<?php echo base_url(); ?>"> <img src="<?php echo base_url(); ?>assets/logo.jpg" alt="church logo" class="img-responsive"></a> </div>
+    <div class="navbar-collapse collapse" id="nav">
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown active"><a href="<?php echo base_url(); ?> ">HOME</a>
+        <li class="active"><a href="<?php echo base_url(); ?> ">HOME</a>
         </li>
         <li><a href="<?php echo base_url('broadcast/about'); ?>">ABOUT</a></li>
         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Media <span class="caret"></span></a>
           <ul class="dropdown-menu dropdown-menu-left" role="menu">
             <li><a href="<?php echo base_url('broadcast/audio'); ?>">Audio</a></li>
-            <li><a href="sermons.html">Drama</a></li>
+            <li><a href="<?php echo base_url('broadcast/drama'); ?>">Drama</a></li>
           </ul>
         </li>
         <li><a href="<?php echo base_url('broadcast/events'); ?>">Events</a></li>
+        <li><a href="<?php echo base_url('broadcast/gallery'); ?>">Gallery</a></li>
         <li><a href="<?php echo base_url('broadcast/contact'); ?>">CONTACT</a></li>
         <li><a href="<?php echo base_url('broadcast/login'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> SIGN IN</a></li>
       </ul>
@@ -56,6 +57,7 @@
     <!--/.nav-collapse --> 
   </div>
 </div>
+<input type="hidden" id="base_url" value="<?php echo base_url(); ?>">
 <!--// Navbar Ends--> 
 <?php
   // print_r(getSliders());exit;

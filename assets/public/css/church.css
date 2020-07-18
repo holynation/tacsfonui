@@ -1156,3 +1156,7 @@ background-color: #D3CFCC;
 	letter-spacing: 0.4px;
 }
 
+.ml-3,
+.mx-3 {
+  margin-left: 1.25rem !important; }
+

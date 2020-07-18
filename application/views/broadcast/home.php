@@ -62,7 +62,7 @@
     <?php if(isset($audios)): ?>
       <?php foreach($audios as $audio){ 
         $audioID = $audio['ID'];
-        $audioImage = ($audio['audios_directory'] != '') ? $audio['audios_directory'] : "uploads/audios/default_audio.jpeg";
+        $audioImage = ($audio['audios_directory'] != '') ? $audio['audios_directory'] : "uploads/audios/default_music.jpeg";
         ?>
     <div class="col-md-4 col-sm-6 has-margin-bottom">
       <img class="img-responsive" src="<?php echo base_url($audioImage); ?>" alt="audio image" width="300" height="300">
@@ -121,7 +121,7 @@
       <!--Blog list-->
       <?php foreach($articles as $article): ?>
       <div class="row has-margin-bottom">
-        <div class="col-md-4 col-sm-4"> <img class="img-responsive center-block" src="<?php echo base_url('assets/public/'); ?>images/blog-thumb-1.jpg" alt="bulletin blog">
+        <div class="col-md-4 col-sm-4"> <img class="img-responsive center-block" src="<?php echo base_url(); ?>assets/article_default.jpg" alt="bulletin blog">
         </div>
         <div class="col-md-8 col-sm-8 bulletin">
           <h4 class="media-heading"><?php echo $article['title']; ?></h4>
@@ -141,8 +141,10 @@
           <h4> RECENT Audio </h4>
         </div>
         <div class="list-group">
-        <?php foreach($extraAudios as $exaudio): ?>
-          <a href="#" class="list-group-item">
+        <?php foreach($extraAudios as $exaudio): 
+          $audioID = $exaudio['ID'];
+          ?>
+          <a href="<?php echo base_url("broadcast/audio/$audioID"); ?>" class="list-group-item">
             <p class="list-group-item-heading" style="color:#fff;"><?php echo $exaudio['title']; ?></p>
             <!-- <p class="list-group-item-text">24:15 mins</p> -->
           </a>
@@ -161,14 +163,12 @@
     <h4> OUR GALLERY </h4>
   </div>
   <div class="img-gallery row">
-    <div class="col-sm-4 col-md-3"> <a class="fancybox" href="<?php echo base_url('assets/public/') ?>images/gallery/img_gallery_2.jpg" data-fancybox-group="gallery" title="church image gallery"> <img src="<?php echo base_url('assets/public/') ?>images/gallery/thumb/gallery_thumb_2.jpg" class="img-responsive" width="270" height="270" alt="church image gallery"> </a> </div>
-    <div class="col-sm-4 col-md-3"> <a class="fancybox" href="<?php echo base_url('assets/public/') ?>images/gallery/img_gallery_2.jpg" data-fancybox-group="gallery" title="church image gallery"> <img src="<?php echo base_url('assets/public/') ?>images/gallery/thumb/gallery_thumb_2.jpg" class="img-responsive" width="270" height="270" alt="church image gallery"> </a> </div>
-    <div class="col-sm-4 col-md-3"> <a class="fancybox" href="<?php echo base_url('assets/public/') ?>images/gallery/img_gallery_3.jpg" data-fancybox-group="gallery" title="church image gallery"> <img src="<?php echo base_url('assets/public/') ?>images/gallery/thumb/gallery_thumb_3.jpg" class="img-responsive" width="270" height="270" alt="church image gallery"> </a> </div>
-    <div class="col-sm-4 col-md-3"> <a class="fancybox" href="<?php echo base_url('assets/public/') ?>images/gallery/img_gallery_4.jpg" data-fancybox-group="gallery" title="church image gallery"> <img src="<?php echo base_url('assets/public/') ?>images/gallery/thumb/gallery_thumb_4.jpg" class="img-responsive" width="270" height="270" alt="church image gallery"> </a> </div>
-    <div class="col-sm-4 col-md-3"> <a class="fancybox" href="<?php echo base_url('assets/public/') ?>images/gallery/img_gallery_5.jpg" data-fancybox-group="gallery" title="church image gallery"> <img src="<?php echo base_url('assets/public/') ?>images/gallery/thumb/gallery_thumb_5.jpg" class="img-responsive" width="270" height="270" alt="church image gallery"> </a> </div>
-    <div class="col-sm-4 col-md-3"> <a class="fancybox" href="<?php echo base_url('assets/public/') ?>images/gallery/img_gallery_6.jpg" data-fancybox-group="gallery" title="church image gallery"> <img src="<?php echo base_url('assets/public/') ?>images/gallery/thumb/gallery_thumb_6.jpg" class="img-responsive" width="270" height="270" alt="church image gallery"> </a> </div>
-    <div class="col-sm-4 col-md-3"> <a class="fancybox" href="<?php echo base_url('assets/public/') ?>images/gallery/img_gallery_7.jpg" data-fancybox-group="gallery" title="church image gallery"> <img src="<?php echo base_url('assets/public/') ?>images/gallery/thumb/gallery_thumb_7.jpg" class="img-responsive" width="270" height="270" alt="church image gallery"> </a> </div>
-    <div class="col-sm-4 col-md-3"> <a class="fancybox" href="<?php echo base_url('assets/public/') ?>images/gallery/img_gallery_8.jpg" data-fancybox-group="gallery" title="church image gallery"> <img src="<?php echo base_url('assets/public/') ?>images/gallery/thumb/gallery_thumb_8.jpg" class="img-responsive" width="270" height="270" alt="church image gallery"> </a> </div>
+    <?php 
+      // print_r($galleries);exit;
+    foreach($galleries as $gallery): ?>
+    <div class="col-sm-4 col-md-3"> <a class="fancybox" href="<?php echo base_url($gallery['gallery_path']); ?>" data-fancybox-group="gallery" title="<?php echo $gallery['title']; ?>"> <img src="<?php echo base_url($gallery['gallery_path']); ?>" class="img-responsive" width="270" height="270" alt="<?php echo $gallery['title']; ?>"> </a>
+    </div>
+  <?php endforeach; ?>
   </div>
 </div>
 <!--// END OUR GALLERY --> 

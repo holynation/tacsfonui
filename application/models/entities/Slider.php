@@ -10,7 +10,7 @@ class Slider extends Crud {
 
 protected static $tablename = "Slider"; 
 /* this array contains the field that can be null*/ 
-static $nullArray = array('date_created');
+static $nullArray = array('date_created','title');
 static $compositePrimaryKey = array();
 static $uploadDependency = array();
 /*this array contains the fields that are unique*/ 
@@ -35,7 +35,7 @@ function __construct($array = array())
 function getTitleFormField($value = ''){
 	return "<div class='form-group'>
 				<label for='title'>Title</label>
-				<input type='text' name='title' id='title' value='$value' class='form-control' required />
+				<input type='text' name='title' id='title' value='$value' class='form-control' />
 			</div>";
 } 
  function getSlider_pathFormField($value = ''){

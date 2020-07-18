@@ -49,14 +49,14 @@ class FormConfig extends CI_Model
 		(
 			'member'=>array
 			(
-				'exclude' => array(),
+				'exclude' => array('status'),
 				'table_exclude'=>array('img_path','status'),
 				'table_action' => $this->alternateAction(),
 				'submit_label' => 'Save',
 				'table_title' => 'Member Table',
 				// 'search'=>array('first_name','last_name','email'),
 				'show_status' => true,
-				'query' => 'select distinct member.ID,firstname,lastname,email,phone_number,path,member.status from member'
+				'query' => 'select distinct member.ID,firstname,lastname,email,phone_number,member_path,member.status from member'
 			),
 			'admin'=>array
 			(

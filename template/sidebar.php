@@ -12,24 +12,18 @@
         <div class="sidebar--profile">
             <div class="profile--img">
                 <a href="profile.html">
-                    <img src="<?php echo base_url(); ?>assets/private/img/avatars/01_80x80.png" alt="" class="rounded-circle">
+                    <img src="<?php echo base_url($userImage); ?>" alt="" class="rounded-circle">
                 </a>
             </div>
-
             <div class="profile--name">
-                <a href="profile.html" class="btn-link">Henry Foster</a>
+                <a href="profile.html" class="btn-link"><?php echo $userName; ?></a>
             </div>
 
             <div class="profile--nav">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a href="profile.html" class="nav-link" title="User Profile">
+                        <a href="<?php echo base_url($userProfile); ?>" class="nav-link" title="User Profile">
                             <i class="fa fa-user"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="lock-screen.html" class="nav-link" title="Lock Screen">
-                            <i class="fa fa-lock"></i>
                         </a>
                     </li>
                     <li class="nav-item">

@@ -125,39 +125,5 @@
 			}
 		}
 
-		public function saveQuestion(){
-			if(isset($_POST['best_ques'])){
-				$appoint_id = $_POST['appoint_id'];
-				$appoint_hash = trim($_POST['appoint_hash']);
-				loadClass($this->load,'patient_symptom');
-				
-				try{
-					$updateList = json_decode($_POST['update'],true);
-					if(empty($updateList)){
-						echo createJsonMessage('status',false,'message','You have not chosen any question','flagAction',false);
-						exit;
-					}
-					$result = $this->patient_symptom->processSymption($appoint_id,$updateList);
-					if($result){
-						$baseUrl = base_url();
-						$baseUrl .= "vc/admin/report?apt_id=$appoint_id&apt=$appoint_hash";
-						$arr['status']=true;
-						$arr['message']= $baseUrl;
-						$arr['flagAction'] = 'redirect';
-						echo json_encode($arr);
-						return;
-					}else{
-						$arr['status']=false;
-						$arr['message']= "an error occured while performing the operation...";
-						echo json_encode($arr);
-						return;
-					}
-					// echo createJsonMessage('status',$result,'message','Question is successfully submitted...','flagAction',true);
-				}catch(Exception $e){
-					echo createJsonMessage('status',false,'message','error occured while submitting the questioning','flagAction',false);
-				}
-			}
-		}
-
 	}
  ?>

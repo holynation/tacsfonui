@@ -36,17 +36,17 @@
     <!-- Wrapper Start -->
     <div class="wrapper">
         <!-- Login Page Start -->
-        <div class="m-account-w" data-bg-img="<?php echo base_url(); ?>assets/private/img/account/wrapper-bg.jpg">
+        <div class="m-account-w" id="banner">
             <div class="m-account">
                 <div class="row no-gutters">
                     <div class="col-md-6">
                         <!-- Login Content Start -->
-                        <div class="m-account--content-w" data-bg-img="<?php echo base_url(); ?>assets/private/img/account/content-bg.jpg">
-                            <div class="m-account--content">
+                        <div class="m-account--content-w" data-bg-img="<?php echo base_url(); ?>assets/background.jpeg" style="opacity: 0.64;image-rendering: optimizeQuality;">
+                            <!-- <div class="m-account--content">
                                 <h2 class="h2">Don't have an account?</h2>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                                 <a href="register.html" class="btn btn-rounded">Register Now</a>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- Login Content End -->
                     </div>
@@ -57,7 +57,9 @@
                             <div class="m-account--form">
                                 <!-- Logo Start -->
                                 <div class="logo">
-                                    <img src="<?php echo base_url(); ?>assets/private/img/logo.png" alt="">
+                                    <a href="<?php echo base_url(); ?>">
+                                        <img src="<?php echo base_url(); ?>assets/logo.jpg" alt="" class="img-thumbnail rounded" width="80" height="80" style="opacity: 0.9;">
+                                    </a>
                                 </div>
                                 <!-- Logo End -->
 
@@ -87,18 +89,17 @@
 
                                     <div class="m-account--actions">
                                         <a href="#" class="btn-link">Forgot Password?</a>
-
                                         <button type="submit" class="btn btn-rounded btn-info">Login</button>
                                     </div>
 
-                                    <div class="m-account--alt">
+                                    <!-- <div class="m-account--alt">
                                         <p><span>OR LOGIN WITH</span></p>
 
                                         <div class="btn-list">
                                             <a href="#" class="btn btn-rounded btn-warning">Facebook</a>
                                             <a href="#" class="btn btn-rounded btn-warning">Google</a>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="m-account--footer">
                                         <p>&copy; <?php echo date('Y'); ?> TACSFON UI</p>

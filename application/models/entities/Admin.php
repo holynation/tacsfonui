@@ -17,14 +17,14 @@ static $uploadDependency = array();
 static $displayField = 'email';// this display field properties is used as a column in a query if a their is a relationship between this table and another table.In the other table, a field showing the relationship between this name having the name of this table i.e something like this. table_id. We cant have the name like this in the table shown to the user like table_id so the display field is use to replace that table_id.However,the display field name provided must be a column in the table to replace the table_id shown to the user,so that when the other model queries,it will use that field name as a column to be fetched along the query rather than the table_id alone.;
 static $uniqueArray = array('email','phone_number');
 /* this is an associative array containing the fieldname and the type of the field*/ 
-static $typeArray = array('firstname' => 'varchar','middlename' => 'varchar','lastname' => 'varchar','email' => 'varchar','phone_number' => 'varchar','address' => 'text','dob' => 'date','role_id'=>'int','status' => 'tinyint','img_path' => 'varchar');
+static $typeArray = array('firstname' => 'varchar','middlename' => 'varchar','lastname' => 'varchar','email' => 'varchar','phone_number' => 'varchar','address' => 'text','dob' => 'date','role_id'=>'int','status' => 'tinyint','admin_path' => 'varchar');
 /*this is a dictionary that map a field name with the label name that will be shown in a form*/ 
-static $labelArray = array('ID' => '','firstname' => '','middlename' => '','lastname' => '','email' => '','phone_number' => '','address' => '','dob' => '','role_id'=>'','status' => '','img_path' => '');
+static $labelArray = array('ID' => '','firstname' => '','middlename' => '','lastname' => '','email' => '','phone_number' => '','address' => '','dob' => '','role_id'=>'','status' => '','admin_path' => '');
 /*associative array of fields that have default value*/ 
 static $defaultArray = array('status' => '1');
  // populate this array with fields that are meant to be displayed as document in the format array("fieldname"=>array("filetype","maxsize",foldertosave","preservefilename"))
 //the folder to save must represent a path from the basepath. it should be a relative path,preserve filename will be either true or false. when true,the file will be uploaded with it default filename else the system will pick the current user id in the session as the name of the file.
-static $documentField = array('img_path'=>array('type'=>array('jpeg','jpg','png','gif'),'size'=>'10000888','directory'=>'','preserve'=>false)); //array containing an associative array of field that should be regareded as document field. it will contain the setting for max size and data type.;
+static $documentField = array('admin_path'=>array('type'=>array('jpeg','jpg','png','gif'),'size'=>'10000888','directory'=>'','preserve'=>false)); //array containing an associative array of field that should be regareded as document field. it will contain the setting for max size and data type.;
 
 static $relation=array('role'=>array( 'role_id', 'ID')
 );
@@ -106,12 +106,12 @@ function getRole_idFormField($value=''){
 	</select>
 	</div> ";
 } 
- function getImg_pathFormField($value = ''){
+ function getAdmin_pathFormField($value = ''){
  	$path=  ($value != '') ? base_url($value) : "";
 	return "<div class='form-group'>
-				<label for='img_path'>Upload Pic</label>
+				<label for='admin_path'>Upload Pic</label>
 				<img src='$path' alt='admin pic' class='img-responsive' width='25%'/>
-				<input type='file' name='img_path' id='img_path' value='$value' class='form-control' />
+				<input type='file' name='admin_path' id='admin_path' value='$value' class='form-control' />
 				
 				
 			</div>";
@@ -143,56 +143,14 @@ public function getDasboardCount($table,$name='amount'){
 	}
 }
 
-public function getPublicationCount(){
-	$count=0;
-	$query = "SELECT count(*) as total from book_published";
-	$result = $this->db->query($query,array($this->ID));
-	$row = $result->result_array();
-	if($result->num_rows() > 0){
-		$count+=$row[0]["total"];
-	}
-
-	$row1 = $this->getSinglePub('chapter_in_book_published');
-	if($row1 > 0){
-		$count+=$row1;
-	}
-	
-	$row2 = $this->getSinglePub('article_in_conference');
-	if($row2 > 0){
-		$count+=$row2;
-	}
-	$row3 = $this->getSinglePub('patents_copyright');
-	if($row3 > 0){
-		$count+=$row3;
-	}
-	$row4 = $this->getSinglePub('article_appear_in_journal');
-	if($row4 > 0){
-		$count+=$row4;
-	}
-	$row5 = $this->getSinglePub('accepted_books');
-	if($row5 > 0){
-		$count+=$row5;
-	}
-	$row6 = $this->getSinglePub('technical_report');
-	if($row6 > 0){
-		$count+=$row6;
-	}
-
-	if($count > 0){
-		return $count;
-	}else{
-		return "0";
-	}
-}
-
-public function getPublicationData($table){
+public function getDashData($table){
 	return array($this->getSinglePub($table));
 }
 
 private function getSinglePub($table){
 	$count=0;
 	$query = "SELECT count(*) as total from $table";
-	$result = $this->db->query($query,array($this->ID));
+	$result = $this->db->query($query);
 	$row = $result->result_array();
 	if($result->num_rows() > 0){
 		return $row[0]["total"];
@@ -200,6 +158,7 @@ private function getSinglePub($table){
 		return 0;
 	}
 }
+
 public function delete($id=null,&$db=null)
 {
 	$db=$this->db;

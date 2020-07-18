@@ -17,9 +17,9 @@ static $uploadDependency = array();
 static $displayField = 'email';// this display field properties is used as a column in a query if a their is a relationship between this table and another table.In the other table, a field showing the relationship between this name having the name of this table i.e something like this. table_id. We cant have the name like this in the table shown to the user like table_id so the display field is use to replace that table_id.However,the display field name provided must be a column in the table to replace the table_id shown to the user,so that when the other model queries,it will use that field name as a column to be fetched along the query rather than the table_id alone.;
 static $uniqueArray = array('email');
 /* this is an associative array containing the fieldname and the type of the field*/ 
-static $typeArray = array('firstname' => 'varchar','lastname' => 'varchar','middlename' => 'varchar','email' => 'varchar','phone_number' => 'varchar','status' => 'tinyint','date_created' => 'timestamp');
+static $typeArray = array('firstname' => 'varchar','lastname' => 'varchar','middlename' => 'varchar','email' => 'varchar','phone_number' => 'varchar','member_path'=>'varchar','status' => 'tinyint','date_created' => 'timestamp');
 /*this is a dictionary that map a field name with the label name that will be shown in a form*/ 
-static $labelArray = array('ID' => '','firstname' => '','lastname' => '','middlename' => '','email' => '','phone_number' => '','status' => '','date_created' => '');
+static $labelArray = array('ID' => '','firstname' => '','lastname' => '','middlename' => '','email' => '','phone_number' => '','member_path'=>'','status' => '','date_created' => '');
 /*associative array of fields that have default value*/ 
 static $defaultArray = array('status' => '1','date_created' => 'current_timestamp()');
  // populate this array with fields that are meant to be displayed as document in the format array("fieldname"=>array("filetype","maxsize",foldertosave","preservefilename"))
@@ -47,7 +47,7 @@ function getFirstnameFormField($value = ''){
  function getMiddlenameFormField($value = ''){
 	return "<div class='form-group'>
 				<label for='middlename'>Middlename</label>
-				<input type='text' name='middlename' id='middlename' value='$value' class='form-control' required />
+				<input type='text' name='middlename' id='middlename' value='$value' class='form-control' />
 			</div>";
 } 
  function getEmailFormField($value = ''){
@@ -61,7 +61,15 @@ function getFirstnameFormField($value = ''){
 				<label for='phone_number'>Phone Number</label>
 				<input type='text' name='phone_number' id='phone_number' value='$value' class='form-control' required />
 			</div>";
-} 
+}
+ function getmember_pathFormField($value = ''){
+ 	$path=  ($value != '') ? base_url($value) : "";
+	return "<div class='form-group'>
+				<label for='member_path'>Member Pic</label>
+				<img src='$path' alt='member pic' class='img-responsive' width='25%'/>
+				<input type='file' name='member_path' id='member_path' value='$value' class='form-control' />		
+			</div>";
+}
  function getStatusFormField($value = ''){
 	return "<div class='form-group'>
 	<label class='form-checkbox'>Status</label>

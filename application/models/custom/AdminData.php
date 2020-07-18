@@ -22,21 +22,19 @@ class AdminData extends CI_Model
 	public function loadDashboardData()
 	{
 		$result = array();
-		// loadClass($this->load,'doctor');
-		// loadClass($this->load,'patients');
-		// loadClass($this->load,'appointment');
-		// $where='';
-		// $doctorID='';
-		// $whereAppoint = '';
-		// if($this->webSessionManager->getCurrentUserProp('user_type') == 'doctor'){
-		// 	$doctorID = $this->webSessionManager->getCurrentUserProp('user_table_id');
-		// 	$where = " and doctor_id = '$doctorID'";
-		// 	$whereAppoint = "where doctor_id = '$doctorID'";
-		// }
-		// $result['countData']=array('doctor'=>$this->doctor->totalCount(),'patients'=>$this->patients->totalCount(),'appointAttend'=>$this->appointment->totalCount("where status = '0' $where"),'appointPend'=>$this->appointment->totalCount("where status = '1' $where"));
-		// $result['appointment'] = $this->appointment->getAppoint($whereAppoint,'5');
-		// $result['doctors'] = $this->doctor->getDoctor();
+		loadClass($this->load,'admin');
+		$result['members'] = $this->admin->getDasboardCount('member','member_total');
+		$result['article'] = $this->admin->getDasboardCount('article','article_total');
+		$result['gallery'] = $this->admin->getDasboardCount('gallery','gallery_total');
 
+		$result['art_data'] = $this->admin->getDashData('article');
+		$result['aud_data'] = $this->admin->getDashData('audios');
+		$result['vid_data'] = $this->admin->getDashData('videos');
+		$result['eve_data'] = $this->admin->getDashData('events');
+		$result['gal_data'] = $this->admin->getDashData('gallery');
+		$jsonArray = array_merge($result['art_data'],$result['aud_data'],$result['vid_data'],$result['eve_data'],$result['gal_data']);
+
+		$result['buildDataJson'] = json_encode($jsonArray);
 		return $result;
 	}
 

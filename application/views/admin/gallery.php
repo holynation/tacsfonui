@@ -36,6 +36,7 @@
                 </div>
 
                 <div class="panel-content">
+                    <p class="alert alert-info">NOTE: For performance sake, pls ensure the image(s) are not too large in size (max: 2MB).</p>
                     <!-- Dropzone Start -->
                     <form action="<?php echo base_url('mc/galleryUpload'); ?>" method="post" enctype="multipart/form-data">
                     	<div class='form-group'>
@@ -49,7 +50,14 @@
 							<label for='title'>Gallery Title</label>
 							<input type='text' name='title' id='title' class='form-control' required />
 						</div>
-
+                        <div class="form-group">
+                            <label for='display_type' >Display Type</label>
+                            <select name='display_type' id='display_type' class='form-control'>
+                                <option value=""></option>
+                                <option value="home">Home</option>
+                                <option value="gallery">Gallery</option>
+                            </select>
+                        </div>
 						<div class="dropzone" id="myDropzone">
 							<div class="dz-message" data-dz-message>Drop gallery files here to upload</div>
 							<div class="fallback">

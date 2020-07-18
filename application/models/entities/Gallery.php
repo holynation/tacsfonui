@@ -17,9 +17,9 @@ static $uploadDependency = array();
 static $displayField = 'title';// this display field properties is used as a column in a query if a their is a relationship between this table and another table.In the other table, a field showing the relationship between this name having the name of this table i.e something like this. table_id. We cant have the name like this in the table shown to the user like table_id so the display field is use to replace that table_id.However,the display field name provided must be a column in the table to replace the table_id shown to the user,so that when the other model queries,it will use that field name as a column to be fetched along the query rather than the table_id alone.;
 static $uniqueArray = array('');
 /* this is an associative array containing the fieldname and the type of the field*/ 
-static $typeArray = array('uploader' => 'varchar','title' => 'varchar','gallery_path' => 'varchar','status' => 'tinyint','date_created' => 'timestamp');
+static $typeArray = array('uploader' => 'varchar','title' => 'varchar','gallery_path' => 'varchar','display_type'=>'enum','status' => 'tinyint','date_created' => 'timestamp');
 /*this is a dictionary that map a field name with the label name that will be shown in a form*/ 
-static $labelArray = array('ID' => '','uploader' => '','title' => '','gallery_path' => '','status' => '','date_created' => '');
+static $labelArray = array('ID' => '','uploader' => '','title' => '','gallery_path' => '','display_type'=>'','status' => '','date_created' => '');
 /*associative array of fields that have default value*/ 
 static $defaultArray = array('status' => '1','date_created' => 'current_timestamp()');
  // populate this array with fields that are meant to be displayed as document in the format array('fieldname'=>array('type'=>array('jpeg','jpg','png','gif'),'size'=>'1048576','directory'=>'pastDeans/','preserve'=>false,'max_width'=>'1000','max_height'=>'500'))
@@ -52,6 +52,16 @@ function getUploaderFormField($value = ''){
 	<img src='$path' alt='gallery pic' width='200px'/>
 	<label for='gallery_path' >Gallery Image</label>
 		<input type='file' name='gallery_path' id='gallery_path' value='$value' class='form-control'  />
+</div> ";
+}
+function getDisplay_typeFormField($value=''){
+	$arr =array('home','gallery');
+	$option = buildOptionUnassoc($arr,$value);
+	return "<div class='form-group'>
+	<label for='display_type' >Display Type</label>
+		<select name='display_type' id='display_type' class='form-control' required>
+		$option
+		</select>
 </div> ";
 } 
  function getStatusFormField($value = ''){

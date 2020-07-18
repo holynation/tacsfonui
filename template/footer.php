@@ -26,7 +26,16 @@
       </div>
       <div class="col-sm-6 col-md-3">
         <h5>CONNECT</h5>
-        <div class="social-icons"><a href="#"><img src="images/fb-icon.png" alt="social"></a> <a href="#"><img src="images/tw-icon.png" alt="social"></a> <a href="#"><img src="images/in-icon.png" alt="social"></a></div>
+        <div>
+          <a href="https://m.facebook.com/ui.tacsfon.7?ref=bookmarks" class="ml-3" target="_blank"><span class="fa fa-facebook-official fa-3x rounded"></i>
+          </a> 
+          <!-- <a href="#">
+            <span class="fa fa-twitter fa-3x rounded"></i>
+          </a>  -->
+          <a href="https://www.instagram.com/tacsfonui/" class="ml-3" target="_blank">
+            <span class="fa fa-instagram fa-3x rounded"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -48,7 +57,15 @@
 <script src="<?php echo base_url(); ?>assets/public/js/owl.carousel.min.js"></script> 
 <script src="<?php echo base_url(); ?>assets/public/js/ketchup.all.js"></script> 
 <script src="<?php echo base_url(); ?>assets/public/js/fancybox.js"></script> 
-<script src="<?php echo base_url(); ?>assets/public/js/script.js"></script> 
+<script src="<?php echo base_url(); ?>assets/public/js/script.js"></script>
+<script type="text/javascript">
+jQuery(function () {
+    var page = location.pathname.split('/').pop();
+    var base_url = $('#base_url').val();
+    console.log(page)
+    $('#nav li a[href=" '+ base_url +'broadcast/'+page+'"]').addClass('active')
+})
+</script>
 
 </body>
 </html>

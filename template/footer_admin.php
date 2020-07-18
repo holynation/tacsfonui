@@ -162,19 +162,11 @@
     <script src="<?php echo base_url(); ?>assets/private/js/moment.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/perfect-scrollbar.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/jquery.sparkline.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/private/js/raphael.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/private/js/morris.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/select2.min.js"></script>
-    <!-- <script src="<?php //echo base_url(); ?>assets/private/js/jquery-jvectormap.min.js"></script> -->
-    <!-- <script src="<?php //echo base_url(); ?>assets/private/js/jquery-jvectormap-world-mill.min.js"></script> -->
-    <!-- <script src="<?php //echo base_url(); ?>assets/private/js/horizontal-timeline.min.js"></script> -->
-    <!-- <script src="<?php //echo base_url(); ?>assets/private/js/jquery.validate.min.js"></script> -->
-    <!-- <script src="<?php //echo base_url(); ?>assets/private/js/jquery.steps.min.js"></script> -->
-    <!-- <script src="<?php //echo base_url(); ?>assets/private/js/datatables.min.js"></script> -->
     <script src="<?php echo base_url(); ?>assets/private/js/dropzone.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/bootstrap-datepicker.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/libs/jquery-datetime-picker/jquery.datetimepicker.full.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/private/libs/summernote/summernote-bs4.min.js"></script>
+    <!-- <script src="<?php //echo base_url(); ?>assets/private/libs/summernote/summernote-bs4.min.js"></script> -->
     <script src="<?php echo base_url(); ?>assets/private/js/main.js"></script>
     <script src="<?php echo base_url(); ?>assets/private/js/custom.js"></script>
 
@@ -188,16 +180,16 @@
          * SUMMERNOTE APP
     * ------------------------------------------------------------------------- */
 
-$(document).ready(function(){
-    $('#summernote_editor').summernote({
-        placeholder: "You can type here articles using this editor...",
-        height: 250,                 // set editor height
-        minHeight: null,             // set minimum height of editor
-        maxHeight: null,             // set maximum height of editor
-        focus: true,                // set focus to editable area after initializing summernote
+// $(document).ready(function(){
+//     $('#summernote_editor').summernote({
+//         placeholder: "You can type here articles using this editor...",
+//         height: 250,                 // set editor height
+//         minHeight: null,             // set minimum height of editor
+//         maxHeight: null,             // set maximum height of editor
+//         focus: true,                // set focus to editable area after initializing summernote
         
-    });
-});
+//     });
+// });
 
 /* ------------------------------------------------------------------------- *
          * CALENDAR APP
@@ -276,10 +268,10 @@ $(document).ready(function() {
 Dropzone.options.myDropzone= {
     url: '<?php echo base_url('mc/galleryUpload'); ?>',
     // paramName: 'fileGallery',
-    autoProcessQueue: false,
+    autoProcessQueue: true,
     uploadMultiple: true,
-    parallelUploads: 20,
-    maxFiles: 20,
+    parallelUploads: 10,
+    maxFiles: 10,
     maxFilesize: 15,
     acceptedFiles: 'image/*',
     addRemoveLinks: true,

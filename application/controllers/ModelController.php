@@ -877,6 +877,7 @@ class ModelController extends CI_Controller
 		if (!empty($_FILES)) {
 			$insertValuesSQL = '';
 			$title = $this->input->post('title',true);
+			$display = $this->input->post('display_type',true);
 			$title = (!empty($title)) ? $title : 'Fellowship event';
 			$uploader = $this->input->post('uploader',true);
 
@@ -888,7 +889,7 @@ class ModelController extends CI_Controller
 			    $targetFile =  $targetPath.$fileName;
 
 			    if(move_uploaded_file($tempFile,$targetFile)){
-			    	$insertValuesSQL .= ($insertValuesSQL) ? ",('".$targetFile."', '$uploader','$title')" :  "('".$targetFile."', '$uploader','$title')";
+			    	$insertValuesSQL .= ($insertValuesSQL) ? ",('".$targetFile."', '$uploader','$title','$display')" :  "('".$targetFile."', '$uploader','$title','$display')";
 			    }
 			}
 			$this->moveFilesGalley($insertValuesSQL);
@@ -897,7 +898,7 @@ class ModelController extends CI_Controller
 
 	private function moveFilesGalley($filePath){
 	    if(!empty($filePath)){ 
-            $insert = $this->db->query("INSERT INTO gallery (gallery_path, uploader,title) VALUES $filePath"); 
+            $insert = $this->db->query("INSERT INTO gallery (gallery_path, uploader,title,display_type) VALUES $filePath"); 
         	if($insert){
         		echo createJsonMessage('status',true,'message','image(s) successfuly uploaded...');
         		return true;
