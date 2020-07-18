@@ -59,12 +59,9 @@
 <script src="<?php echo base_url(); ?>assets/public/js/fancybox.js"></script> 
 <script src="<?php echo base_url(); ?>assets/public/js/script.js"></script>
 <script type="text/javascript">
-jQuery(function () {
-    var page = location.pathname.split('/').pop();
-    var base_url = $('#base_url').val();
-    console.log(page)
-    $('#nav li a[href=" '+ base_url +'broadcast/'+page+'"]').addClass('active')
-})
+  $(function(){
+    $('#nav a').filter(function(){return this.href==location.href}).parent().addClass('active').siblings().removeClass('active');
+  });
 </script>
 
 </body>
