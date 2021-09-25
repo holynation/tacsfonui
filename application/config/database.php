@@ -77,7 +77,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' =>  $_SERVER['HTTP_HOST']=='localhost'?'root':'',
-	'password' =>  $_SERVER['HTTP_HOST']=='localhost'?'':'', //here is where your mysql password goes if exist
+	'password' =>  $_SERVER['HTTP_HOST']=='localhost'?'Since_feb_2015':'', //here is where your mysql password goes if exist
 	'database' =>  $_SERVER['HTTP_HOST']=='localhost'?'tacsfon':'', //database name goes here
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

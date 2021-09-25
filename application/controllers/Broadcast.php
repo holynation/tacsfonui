@@ -100,7 +100,4 @@ class Broadcast extends CI_Controller {
 	public function login(){
 		$this->load->view('login');
 	}
-
-	// 2BB3C0
-	#1B2223
 }
