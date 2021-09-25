@@ -422,7 +422,7 @@ top: 20%;
 /* Declare heights because of positioning of img element */
 .carousel .item {
 	height: 650px;
-	background-color: #e2beae;
+	background-color: #1B2223;
 }
 .carousel-control.left {
 	background-image:none;
@@ -432,6 +432,19 @@ top: 20%;
 }
 .carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
 	top:55%;
+}
+
+@media only screen and (max-width:767px) {
+	.carousel {
+		height: 30rem;
+	}
+	.carousel .item {
+		height: 30rem;
+		background-color: #1B2223;
+	}
+	.carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
+		top:22rem;
+	}
 }
 
 

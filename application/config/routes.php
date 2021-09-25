@@ -49,15 +49,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-
-//routes for web apis
-$route['api/(:any)']='api/webapi/$1';
-$route['api/(:any)/(:any)']='api/webapi/$1/$2';
-$route['api/(:any)/(:any)/(:any)']='api/webapi/$1/$2/$3';
-$route['profile/(:any)']='api/webapi/profile/$1';
-
-
 $route['default_controller'] = 'broadcast';
+$route['about'] = 'broadcast/about';
+$route['audio'] = 'broadcast/audio';
+$route['audio/(:any)'] = 'broadcast/audio/$1';
+$route['drama'] = 'broadcast/drama';
+$route['events'] = 'broadcast/events';
+$route['gallery'] = 'broadcast/gallery';
+$route['contact'] = 'broadcast/contact';
+$route['login'] = 'broadcast/login';
+
 $route['vc/create/(:any)']='viewController/create/$1';
 $route['vc/create/(:any)/(:any)']='viewController/create/$1/$2';
 $route['edit/(:any)/(:any)'] = 'viewController/edit/$1/$2';

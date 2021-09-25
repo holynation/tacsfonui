@@ -28,7 +28,8 @@
         <div class="col-md-8 col-sm-8 bulletin">
           <h4 class="media-heading"><?php echo $event['title']; ?> </h4>
           <p class="media-content"><?php echo $event['description']; ?></p>
-          <a class="btn btn-primary" href="#" role="button">Anticipate</a>
+          <img src="<?php echo base_url($event['events_path']); ?>" class="img-fluid img-responsive" style="width:20rem;height:20rem;margin-bottom:10px; " />
+          <!--<a class="btn btn-primary" href="#" role="button">Anticipate</a>-->
       	</div>
       </div>
       <hr>

@@ -3,8 +3,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-md-3">
-        <h5>ABOUT THE CHURCH</h5>
-        <p>For the word of God is living and active. Sharper than any double-edged sword, it penetrates even to dividing soul and spirit, joints and marrow; it judges the thoughts and attitudes.</p>
+        <h5>ABOUT THE FELLOWSHIP</h5>
+        <p>TACSFON UI is a place where men are made, formed and built from lively stones before taken to build lively stones. The watchword of the fellowship is 1 Timothy 4:12; Let no man despise your youth but be thou an example of the belivers, in word, in conversation, in charity in spirit, in faith, in purity..</p>
       </div>
       <div class="col-sm-6 col-md-3">
         <h5>QUICK LINKS</h5>

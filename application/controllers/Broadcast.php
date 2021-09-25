@@ -56,7 +56,7 @@ class Broadcast extends CI_Controller {
 	public function events(){
 		$data = array();
 		loadClass($this->load,'events');
-		$data['events'] = $this->events->getEvents(" order by start desc limit 10");
+		$data['events'] = $this->events->getEvents(" order by start asc limit 10");
 		$this->load->view('broadcast/events',$data);
 	}
 
@@ -67,14 +67,15 @@ class Broadcast extends CI_Controller {
 		$this->load->view('broadcast/gallery',$data);
 	}
 
-	public function audio($id=null){
+	public function audio($name=null){
 		$data = array();
 		loadClass($this->load,'audios');
 		$where='';
 		$param = 'many';
-		if(!is_null($id)){
+		if(!is_null($name)){
 			$param = 'single';
-			$where = " where ID = '$id'";
+			$name = urldecode($name);
+			$where = " where title like '%$name%' ";
 			$data['extraAudios'] = $this->audios->allNonObject($totalRow,false,0,7,"order by date_created desc");
 		}
 		$data['param'] = $param;
@@ -100,4 +101,7 @@ class Broadcast extends CI_Controller {
 	public function login(){
 		$this->load->view('login');
 	}
+
+	// 2BB3C0
+	#1B2223
 }

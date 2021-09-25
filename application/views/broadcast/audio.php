@@ -17,13 +17,13 @@
 	</div>
 	<div class="row feature-block">
 	<?php foreach($audios as $audio):  
-			$audioID = $audio['ID'];
+			$audioName = urlencode($audio['title']);
 			$audioImage = ($audio['audios_directory'] != '') ? $audio['audios_directory'] : "uploads/audios/default_audio.jpeg";
 		?>
 	    <div class="col-md-4 col-sm-6 has-margin-bottom"> <img class="img-responsive" src="<?php echo base_url($audioImage); ?>" alt="audio image">
 	      <h5><?php echo $audio['title']; ?></h5>
 	      <p><?php echo $audio['caption']; ?> </p>
-	      <p><a href="<?php echo base_url("broadcast/audio/$audioID"); ?>" role="button" class="btn btn-primary">View →</a></p>
+	      <p><a href="<?php echo base_url("audio/$audioName"); ?>" role="button" class="btn btn-primary">View →</a></p>
 	    </div>
 	    <!-- /.col-md-4 -->
 	<?php endforeach; ?>
@@ -76,9 +76,9 @@
         </div>
         <div class="list-group">
         <?php foreach($extraAudios as $exaudio): 
-        		$exaudioID = $exaudio['ID'];
+        		$exaudioName = urlencode($exaudio['title']);
         	?>
-        	<a href="<?php echo base_url("broadcast/audio/$exaudioID"); ?>" class="list-group-item">
+        	<a href="<?php echo base_url("audio/$exaudioName"); ?>" class="list-group-item">
 	          <p class="list-group-item-heading" style="color:#fff;"><?php echo $exaudio['title']; ?></p>
 	          <!-- <p class="list-group-item-text">24:15 mins</p> -->
 	        </a>

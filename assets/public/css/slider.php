@@ -12,13 +12,13 @@ $slider = getSliders();
 for($i=0; $i < count($slider); $i++){
   if($i == 0){
     $first = $slider[$i]['slider_path'];
-    $firstTitle = $slider[$i]['title'];
+    $firstTitle = "";
   }else if($i == 1){
   	$second = $slider[$i]['slider_path'];
-  	$secondTitle = $slider[$i]['title'];
+  	$secondTitle = "";
   }else if($i == 2){
   	$third = $slider[$i]['slider_path'];
-  	$thirdTitle = $slider[$i]['title'];
+  	$thirdTitle = "";
   }
 }
 ?>
@@ -34,5 +34,31 @@ for($i=0; $i < count($slider); $i++){
 .slide-three {
 	background:url(<?= $third ?>) no-repeat;
 	background-size:cover;
+}
+@media only screen and (max-width:767px) {
+.slide-one {
+  background:url(<?= $first ?>) no-repeat;
+   vertical-align: middle;
+    background-size: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.slide-two {
+  background:url(<?= $second ?>) no-repeat;
+   vertical-align: middle;
+    background-size: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.slide-three {
+  background:url(<?= $third ?>) no-repeat;
+   vertical-align: middle;
+    background-size: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 }
 </style>

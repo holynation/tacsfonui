@@ -41,17 +41,17 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="active"><a href="<?php echo base_url(); ?> ">HOME</a>
         </li>
-        <li><a href="<?php echo base_url('broadcast/about'); ?>">ABOUT</a></li>
+        <li><a href="<?php echo base_url('about'); ?>">ABOUT</a></li>
         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Media <span class="caret"></span></a>
           <ul class="dropdown-menu dropdown-menu-left" role="menu">
-            <li><a href="<?php echo base_url('broadcast/audio'); ?>">Audio</a></li>
-            <li><a href="<?php echo base_url('broadcast/drama'); ?>">Drama</a></li>
+            <li><a href="<?php echo base_url('audio'); ?>">Audio</a></li>
+            <li><a href="<?php echo base_url('drama'); ?>">Drama</a></li>
           </ul>
         </li>
-        <li><a href="<?php echo base_url('broadcast/events'); ?>">Events</a></li>
-        <li><a href="<?php echo base_url('broadcast/gallery'); ?>">Gallery</a></li>
-        <li><a href="<?php echo base_url('broadcast/contact'); ?>">CONTACT</a></li>
-        <li><a href="<?php echo base_url('broadcast/login'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> SIGN IN</a></li>
+        <li><a href="<?php echo base_url('events'); ?>">Events</a></li>
+        <li><a href="<?php echo base_url('gallery'); ?>">Gallery</a></li>
+        <li><a href="<?php echo base_url('contact'); ?>">CONTACT</a></li>
+        <li><a href="<?php echo base_url('login'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> SIGN IN</a></li>
       </ul>
     </div>
     <!--/.nav-collapse --> 

@@ -529,10 +529,3 @@
 		$len = strlen($toReplace);
 		return substr_replace($string, $replacement, $pos,$len);
 	}
-
-	function displayJson($status,$message,$payload=false)
-	{
-		$param = array('status'=>$status,'message'=>$message,'payload'=>$payload);
-		$result = json_encode($param);
-		echo $result;
-	}

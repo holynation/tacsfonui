@@ -47,7 +47,9 @@
     <div class="ec-txt"> <span>UPCOMING EVENT</span>
       <p><?php echo $currentEvent['title']; ?></p>
     </div>
-    <a class="btn btn-lg btn-primary" href="<?php echo base_url("broadcast/event_single/$currentEventID"); ?>" role="button">Program details →</a> </div>
+    <a class="btn btn-lg btn-primary" href="javascript:void(0);" role="button">Anticipate</a>
+    <!-- <a class="btn btn-lg btn-primary" href="<?php //echo base_url("broadcast/event_single/$currentEventID"); ?>" role="button">Program details →</a> -->
+  </div>
     <?php else: ?>
       <div class="ec-txt"> <span>UPCOMING EVENT</span>
         <p>There is no current event at the moment...</p>
@@ -61,14 +63,14 @@
   <div class="row feature-block">
     <?php if(isset($audios)): ?>
       <?php foreach($audios as $audio){ 
-        $audioID = $audio['ID'];
+        $audioName = urlencode($audio['title']);
         $audioImage = ($audio['audios_directory'] != '') ? $audio['audios_directory'] : "uploads/audios/default_music.jpeg";
         ?>
     <div class="col-md-4 col-sm-6 has-margin-bottom">
       <img class="img-responsive" src="<?php echo base_url($audioImage); ?>" alt="audio image" width="300" height="300">
       <h5><?php echo $audio['title']; ?></h5>
       <p><?php echo $audio['caption']; ?> </p>
-      <p><a href="<?php echo base_url("broadcast/audio/$audioID"); ?>" class="btn btn-primary" role="button">View details →</a></p>
+      <p><a href="<?php echo base_url("audio/$audioName"); ?>" class="btn btn-primary" role="button">View details →</a></p>
     </div>
     <!-- /.col-md-4 -->
   <?php } endif; ?>
@@ -92,6 +94,7 @@
           <div class="el-block item">
             <h4> <?php echo formatMonthDay($event['start']); ?> </h4>
             <p class="el-head"><?php echo $event['title']; ?></p>
+            <img src="<?php echo base_url($event['events_path']); ?>" class="img-fluid img-responsive" style="width:30rem;height:20rem;margin-bottom:10px;margin:0 auto;" />
             <span class="el-dated"><?php echo formatDay($event['start']) ." ". localTimeRead($event['start']); ?></span>
             <!-- <p class="el-cta"><a class="btn btn-primary" href="<?php //echo base_url("broadcast/event_single/$eventID") ?>" role="button">Details &rarr;</a></p> -->
           </div>
@@ -142,9 +145,9 @@
         </div>
         <div class="list-group">
         <?php foreach($extraAudios as $exaudio): 
-          $audioID = $exaudio['ID'];
+          $audioName = urlencode($exaudio['title']);
           ?>
-          <a href="<?php echo base_url("broadcast/audio/$audioID"); ?>" class="list-group-item">
+          <a href="<?php echo base_url("audio/$audioName"); ?>" class="list-group-item">
             <p class="list-group-item-heading" style="color:#fff;"><?php echo $exaudio['title']; ?></p>
             <!-- <p class="list-group-item-text">24:15 mins</p> -->
           </a>
