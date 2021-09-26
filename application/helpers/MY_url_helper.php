@@ -1,5 +1,13 @@
 <?php 
 
+function getMember()
+{
+    if (isset($_SERVER['current_user']) && $_SERVER['current_user']) {
+        return $_SERVER['current_user'];
+    }
+    return false;
+}
+
 //function for sending post http request using curl
 function sendPost($url,$post,&$errorMessage,$returnResult=false){
 	$res = curl_init($url);

@@ -5,8 +5,8 @@
 */
 class FormConfig extends CI_Model
 {
-	private  $insertConfig;
-	private $updateConfig;
+	private  $insertConfig = array();
+	private $updateConfig = array();
 	public $currentRole;
 	
 	function __construct($currentRole=false)

@@ -232,4 +232,59 @@ function fetchField($array,$field)
 	}
 	return $result;
 }
+
+// here is for api function
+function listAPIEntities($db)
+{
+	$exemptions = array('user','member','order_payment','role');
+	$query='show tables';
+	$dbResult = $db->query($query);
+	$dbResult = $dbResult->result_array();
+	$result=array();
+	foreach ($dbResult as $res) {
+		$temp = reset($res);
+		if (in_array($temp, $exemptions)) {
+			continue;
+		}
+		$result[]=$temp;
+	}
+	return $result;
+}
+
+function listEntities($db)
+{
+	$query='show tables';
+	$dbResult = $db->query($query);
+	$dbResult = $dbResult->result_array();
+	$result=array();
+	foreach ($dbResult as $res) {
+		$result[]=reset($res);
+	}
+	return $result;
+}
+
+function getEntityTranslation()
+{
+	# this gets the translation from the database
+	$result = array(
+		'users'=>'admin',
+	);
+	return $result;
+}
+//the set of methods that are allowed for the api to access and the translation for those that has translation
+function getDeniedApiMethods()
+{
+	$result = array('user','customer_login','');
+}
+
+function generateHashRef($type=''){
+	$hash = "#".randStrGen(8).randStrGen(10).date("s"); //  the total should be 20 in character
+	$ref = randStrGen(10);
+	$withdraw = randStrGen(15).date("s");
+	$result = array('receipt' => $hash,'reference' => $ref,'withdraw'=>$withdraw);
+	return $result[$type];
+}
+
+
+
 ?>

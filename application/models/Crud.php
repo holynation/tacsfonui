@@ -280,7 +280,7 @@ class Crud extends CI_Model
 		}
 		return $objectArray;
 	}
-	function allNonObject(&$totalRow=0,$resolveForeign=true,$lower=0,$length=NULL,$sort=''){
+	function allNonObject(&$totalRow=0,$resolveForeign=true,$lower=0,$length=NULL,$sort='',$where=''){
 		$tablename =$this->getTableName();
 		$limit="";
 		$array=array();
@@ -288,7 +288,7 @@ class Crud extends CI_Model
 			$limit = " LIMIT ?,?";
 			$array=array($lower,$length);
 		}
-		$query =$resolveForeign?$this->buildSelectClause()." $sort $limit":"SELECT SQL_CALC_FOUND_ROWS * FROM $tablename $sort $limit ";
+		$query =$resolveForeign?$this->buildSelectClause()." $where $sort $limit":"SELECT SQL_CALC_FOUND_ROWS * FROM $tablename $where $sort $limit ";
 		
 		$result = $this->query($query,$array);
 		$result2 = $this->query("SELECT FOUND_ROWS() as totalCount");
@@ -311,6 +311,94 @@ class Crud extends CI_Model
 		$totalRow=$result2[0]['totalCount'];
 		return $this->buildObject($tablename,$result);
 	}
+
+	// added this for json request and response using framework like vue
+	//the where contains the list of fieldname and the value
+	function allListFiltered($parameter,&$totalRow=-1,$start=0,$length=NULL,$resolveForeign=true,$sort=' order by ID desc ',$queryString='',&$dbObject=null){
+		$tablename =$this->getTableName();
+		$classname = ucfirst($tablename);
+		$limit="";
+		$array=array();
+		if ($length!=NULL) {
+			$start =$this->db->conn_id->escape_string($start);
+			$length =$this->db->conn_id->escape_string($length);
+			$limit = " LIMIT $start,$length";
+			// $array=array($start,$length);
+		}
+		$whereString = $this->buildWhereString($parameter,$data);
+		if (!empty($array)) {
+			$data = array_merge($data,$array);
+		}
+		if ($whereString) {
+			if ($queryString) {
+				$queryString = " and ($queryString) ";
+				$whereString.=$queryString;
+			}
+			$query = $resolveForeign?$this->buildSelectClause()." where  $whereString $sort $limit":"SELECT SQL_CALC_FOUND_ROWS * from $tablename where  $whereString $sort $limit";
+		}
+		else{
+			if ($queryString) {
+				$queryString = " where ($queryString) ";
+			}
+			$query = $resolveForeign?$this->buildSelectClause()." $queryString $sort  $limit":"SELECT SQL_CALC_FOUND_ROWS * from $tablename $queryString $sort $limit";
+		}
+		$result= $this->query($query,$data,$dbObject);
+		$result2 = $this->query("SELECT FOUND_ROWS() as totalCount");
+		$totalRow=$result2[0]['totalCount'];
+		return array($result,$totalRow);
+
+	}
+	
+	function allList(&$totalRow=0,$resolveForeign=true,$lower=0,$length=NULL,$filter=false,$q=false,$sort='order by ID desc'){
+		$tablename =$this->getTableName();
+		$limit="";
+		$array=array();
+		if ($length!=NULL) {
+			$limit = " LIMIT ?,?";
+			$array=array($lower,$length);
+		}
+		$query =$resolveForeign?$this->buildSelectClause()." $sort $limit":"SELECT SQL_CALC_FOUND_ROWS * FROM $tablename $sort $limit ";
+		$result = $this->query($query,$array);
+		$result2 = $this->query("SELECT FOUND_ROWS() as totalCount");
+		$totalRow=$result2[0]['totalCount'];
+		return $result;
+	}
+
+	public function allQuery($query)
+	{
+		$tempQuery =$this->db->conn_id->escape($query);
+		$fields = array_keys(static::$labelArray);
+		$isFirst = true;
+		$result ="";
+		foreach ($field as $fields) {
+			if (!isFirst) {
+				$result.=' or ';
+				$isFirst=false;
+				continue;
+			}
+			$result.=" $field like '%$tempQuery%' ";
+		}
+		return $result;
+
+	}
+
+	function search($q,&$totalRow=0,$resolveForeign=true,$lower=0,$length=NULL,$sort=''){
+		$tablename =$this->getTableName();
+		$limit="";
+		$array=array();
+		if ($length!=NULL) {
+			$limit = " LIMIT ?,?";
+			$array=array($lower,$length);
+		}
+		$allQuery = $this->getAllQuery($q);
+		$query =$resolveForeign?$this->buildSelectClause($allQuery)." $sort $limit":"SELECT SQL_CALC_FOUND_ROWS * FROM $tablename $sort $limit ";
+		$result = $this->query($query,$array);
+		$result2 = $this->query("SELECT FOUND_ROWS() as totalCount");
+		$totalRow=$result2[0]['totalCount'];
+		return $result;
+	}
+
+	// ended here
 	
 	function view($id='',&$dbObject=null){
 		if (empty($id)) {
@@ -583,7 +671,8 @@ class Crud extends CI_Model
 			$query = $this->buildJoin($table,$display);
 		}
 		else{
-			$query = "SELECT id,$display as value FROM $table order by $orderBy asc";
+			$orderBy = ($orderBy != '') ? $orderBy : "order by ID asc"; 
+			$query = "SELECT id,$display as value FROM $table $orderBy";
 		}
 		$result =$this->query($query);
 		if (is_array($prepend)) {
@@ -617,7 +706,7 @@ class Crud extends CI_Model
 	}
 	public function buildSelectOption($array,$val,$hidden=false){
 
-		$result = "<option value='' selected='selected'>..choose..</option>";
+		$result = "<option value='' selected='selected'>...choose option...</option>";
 		if ($val) {
 			$result = "<option value=''>..choose..</option>";
 		}

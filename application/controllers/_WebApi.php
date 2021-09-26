@@ -1,12 +1,12 @@
 <?php 
-/**
-* 
-*/
-class Api extends CI_Controller
-{
-
-	function __construct()
+	/**
+	* This class like other controller for handling api
+	*/
+	class WebApi extends CI_Controller
+	{
+		function __construct()
 		{
+			echo "got here";exit;
 			parent::__construct();
 			$this->load->model('crud');
 			$this->load->model('webSessionManager');
@@ -15,9 +15,13 @@ class Api extends CI_Controller
 	    	$this->load->model('entities/user');
 
 	    	// using this to know if request was coming from react client
-			if(strpos(@$_SERVER['PATH_INFO'], 'api') !== FALSE || strpos(@$_SERVER['ORIG_PATH_INFO'], 'api') !== FALSE){
+			if(strpos(@$_SERVER['PATH_INFO'], 'webapi') !== FALSE || strpos(@$_SERVER['ORIG_PATH_INFO'], 'webapi') !== FALSE){
 				header("Content-Type:application/json");
 			}
+		}
+
+		public function test(){
+			echo "got here";exit;
 		}
 
 		/********************************************
@@ -42,6 +46,7 @@ class Api extends CI_Controller
 
 	    public function webapi($entity)
 		{
+			echo "got here";exit;
 			// if (!$this->validateWebApiAccess()) {
 			// 	http_response_code(405);
 			// 	displayJson(false,'denied');
@@ -71,6 +76,5 @@ class Api extends CI_Controller
 			}
 			
 		}
-
-}
+	}
  ?>

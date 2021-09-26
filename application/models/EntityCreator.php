@@ -22,7 +22,7 @@ class EntityCreator extends CI_Model
 		return true;
 		//check that the user has permission to modify
 		$cookie = getPageCookie();
-		if (!in_array($this->webSessionManager->getCurrentUserProp('user_type'), array('student','admin','lecturer')) && @!$this->role->canModify($cookie[0],$cookie[1])) {
+		if (!in_array($this->webSessionManager->getCurrentUserProp('user_type'), array('member','admin')) && @!$this->role->canModify($cookie[0],$cookie[1])) {
 		  # who the access denied page.
 			if (isset($_GET['a']) && $_GET['a']) {
 				displayJson(false,'you do not  have permission to perform this action');exit;
