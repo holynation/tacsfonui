@@ -16,6 +16,8 @@ class Api extends CI_Controller
 
 	    	// using this to know if request was coming from react client
 			if(strpos(@$_SERVER['PATH_INFO'], 'api') !== FALSE || strpos(@$_SERVER['ORIG_PATH_INFO'], 'api') !== FALSE){
+				header("Access-Control-Allow-Origin: *");
+				header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 				header("Content-Type:application/json");
 			}
 		}

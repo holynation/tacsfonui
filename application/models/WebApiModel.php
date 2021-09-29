@@ -10,13 +10,16 @@ class WebApiModel extends CI_Model
 	{
 		parent::__construct();
 		$this->load->model('webSessionManager');
-        $this->load->model('mailer');
 		
 		// using this to set the member so that it is included in the post array
 		if ($member=getMember()) {
 			$_POST['member_id']=$member->ID;
 		}
 	}
+
+    function ping(){
+        displayJson(true,'testing case for cors header');return;
+    }
 
 	// here is the where the api start
 
