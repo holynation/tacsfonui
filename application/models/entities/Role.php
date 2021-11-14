@@ -241,6 +241,7 @@ public function getModules()
 			'children'=>array(
 				'Admin'=>'vc/create/admin',
 				'Member'=>'vc/create/member',
+				'Excos' => 'vc/create/excos',
 				'Role'=>'vc/create/role'
 			)
 		),

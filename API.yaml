@@ -1,0 +1,40 @@
+SITE_URL: https://tacsfonui.org/
+BASE_URL: https://tacsfonui.org/api/
+
+
+GET
+/article
+
+GET
+/audios
+
+GET
+/events
+
+GET
+/gallery
+
+GET
+/slider
+
+GET
+/videos
+
+NOTE: TO SUCCESSFULLY LOAD ANY LINK ON THE SITE. THE URL GOES LIKE THIS "https://tacsfonui.org/{link}"
+
+# things to perform on the server
+
+create table excos(
+  ID int(11) not null auto_increment primary key,
+  name varchar(150) not null,
+    post text not null,
+  dob varchar(50) not null,
+  excos_path varchar(150) not null,
+  status tinyint(1) not null default '1',
+  date_modified timestamp not null default now() on update now(),
+  date_created timestamp not null default now()
+  
+)
+
+--- excos entity model file
+--- add excos to the role sidebar

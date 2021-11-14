@@ -19,5 +19,14 @@ class ModelControllerDataValidator extends CI_Model
 			return true;
 		}
 	}
+
+	public function validateExcosData(&$data,$type,&$message){
+		if($type == 'insert'){
+			if($data['dob']) {
+				$data['dob'] = formatToDateOnly($data['dob']);
+			}
+		}
+		return true;
+	}
 }
  ?>

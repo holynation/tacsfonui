@@ -304,6 +304,10 @@
  		}
  		return false;	
  	}
+ 	function formatToDateOnly($dateTime){
+ 		$date = new DateTime($dateTime);
+		return $date->format('Y-m-d');
+ 	}
 	function dateFormatter($posted){
  		if($posted){
  			$date = strftime("%d %B, %Y", strtotime($posted));
@@ -532,6 +536,9 @@
 	
 	function displayJson($status,$message,$payload=false)
 	{
+		header("Content-Type:application/json");
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 		$param = array('status'=>$status,'message'=>$message,'payload'=>$payload);
 		$result = json_encode($param);
 		echo $result;
